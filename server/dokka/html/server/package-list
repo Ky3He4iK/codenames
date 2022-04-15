@@ -1,0 +1,8 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:codenames.server////PointingToDeclaration/server/codenames.server/index.html
+$dokka.location:codenames.server//main/#kotlin.Array[kotlin.String]/PointingToDeclaration/server/codenames.server/main.html
+$dokka.location:codenames.server/ServerApplication///PointingToDeclaration/server/codenames.server/-server-application/index.html
+$dokka.location:codenames.server/ServerApplication/ServerApplication/#/PointingToDeclaration/server/codenames.server/-server-application/-server-application.html
+codenames.server
+
