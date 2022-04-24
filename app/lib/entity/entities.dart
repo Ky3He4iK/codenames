@@ -34,9 +34,10 @@ class Settings {
   int cardCount;
   int blackCardCount;
   int whiteCardCount;
+  int wordlistId;
 
   Settings(this.teamsCount, this.turnTime, this.cardCount, this.blackCardCount,
-      this.whiteCardCount);
+      this.whiteCardCount, this.wordlistId);
 }
 
 class Player {
