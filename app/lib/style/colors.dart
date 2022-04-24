@@ -7,6 +7,7 @@ class ColorConstants {
   static const green = Color(0xFF0FA688);
   static const black = Color(0xFF4D4D4D);
   static const grey = Color(0xFFCBCBCB);
+  static const greyDark = Color(0x804D4D4D);
   static const white = Color(0xFFFFFFFF);
   static const greyInput = Color(0xFFE6E6E6);
 }

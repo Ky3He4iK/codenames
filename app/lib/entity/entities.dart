@@ -56,7 +56,7 @@ class Room {
   String inviteCode;
   int type;
   String name;
-  Game game;
+  Game? game;
 
   Room(this.roomId, this.settings, this.players, this.owner, this.inviteCode,
       this.type, this.name, this.game);
