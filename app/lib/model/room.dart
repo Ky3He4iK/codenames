@@ -1,5 +1,6 @@
+import 'package:app/model/participant.dart';
+
 import 'settings.dart';
-import 'participant.dart';
 
 class Room{
   Settings _settings;
