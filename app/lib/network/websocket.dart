@@ -1,24 +1,28 @@
-import 'package:flutter/material.dart';
-import 'package:web_socket_channel/io.dart';
+import 'dart:async';
+
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 class WebSocket {
-  late final IOWebSocketChannel _channel;
+  late final WebSocketChannel _channel;
+  late final StreamSubscription subscription;
 
   void sendMessage(String text) {
     _channel.sink.add(text);
   }
 
   void dispose() {
+    subscription.cancel();
     _channel.sink.close();
   }
 
-  WebSocket(void Function(dynamic) onMessage, // message => void
-      {Function? onError, // message => void
+  WebSocket(void Function(String) onMessage, // message => void
+      {void Function(String)? onError, // error => void
       void Function()? onDone, // void => void
-      String url = 'wss://echo.websocket.events'}) {
-    _channel = IOWebSocketChannel.connect(
+      String url = 'ws://localhost:8080'}) {
+    _channel = WebSocketChannel.connect(
       Uri.parse(url),
     );
-    _channel.stream.listen(onMessage, onError: onError, onDone: onDone);
+    subscription = _channel.stream.listen(onMessage as void Function(dynamic),
+        onError: onError, onDone: onDone);
   }
 }
