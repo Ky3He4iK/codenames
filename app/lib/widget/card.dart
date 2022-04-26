@@ -5,13 +5,13 @@ class CardWidget extends StatelessWidget {
   final EdgeInsets insets;
   final int flex;
   final Widget child;
-  final Color color;
+  final Color? color;
 
   const CardWidget({
     Key? key,
     this.insets = const EdgeInsets.all(4),
     this.flex = 1,
-    this.color = ColorConstants.white,
+    this.color = null,
     required this.child,
   }) : super(key: key);
 
@@ -30,6 +30,7 @@ class CardWidget extends StatelessWidget {
               ),
               child: Column(
                 children: [
+                  if (color != null)
                   Container(
                     height: 20,
                     width: double.infinity,

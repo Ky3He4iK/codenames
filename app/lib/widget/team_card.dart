@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:app/style/colors.dart';
 import '../entity/entities.dart';
 import 'card.dart';
+import 'text_widget.dart';
 import 'package:collection/collection.dart';
 
 class TeamCardWidget extends StatelessWidget {
@@ -33,7 +34,7 @@ class TeamCardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TeamListWidget(captain: captain, team: team, username: username,),
+              TeamListWidget(captain: captain, team: team, username: username, color: color),
               JoinWidget(team: team, username: username, color: color, captain: captain),
             ],
         )));
@@ -46,55 +47,42 @@ class TeamListWidget extends StatelessWidget {
     required this.captain,
     required this.team,
     required this.username,
+    required this.color,
   }) : super(key: key);
 
   final String? captain;
   final List<String> team;
   final String username;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          'Капитан',
-          maxLines: 3,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-              color: ColorConstants.black,
-              fontStyle: FontStyle.italic,
-              fontSize: 24),
+        TextWidget(
+          text: 'Капитан',
+          size: TextSize.SMALL
         ),
-        Text(
-          captain != null ? captain == username ? '${captain!} (Вы)' : captain! : "Не занято",
-          maxLines: 3,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-              color: ColorConstants.black,
-              fontWeight: FontWeight.w900,
-              fontStyle: FontStyle.italic,
-              fontSize: 24),
+        TextWidget(
+          text: captain != null ? captain == username ? '${captain!} (Вы)' : captain! : "Не занято"
         ),
-        Text(
-          'Команда',
-          maxLines: 3,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-              color: ColorConstants.black,
-              fontStyle: FontStyle.italic,
-              fontSize: 24),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Container(
+              height: 2,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  color: color,
+              )),
+        ),
+        TextWidget(
+            text: 'Команда',
+            size: TextSize.SMALL
         ),
         if (team.isNotEmpty)
         Column(
-          children: [for (var i in team) Text(
-            i == username ? '$i (Вы)' : i,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-                color: ColorConstants.black,
-                fontWeight: FontWeight.w900,
-                fontStyle: FontStyle.italic,
-                fontSize: 24),
+          children: [for (var i in team) TextWidget(
+            text: i == username ? '$i (Вы)' : i,
           ),],
         )
         else
@@ -104,14 +92,16 @@ class TeamListWidget extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
                 color: ColorConstants.greyDark,
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.w700,
                 fontStyle: FontStyle.italic,
-                fontSize: 24),
+                fontSize: 30),
           ),
       ],
     );
   }
 }
+
+
 
 class JoinWidget extends StatelessWidget {
   const JoinWidget({
@@ -133,34 +123,57 @@ class JoinWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
+        const Text(
           'Войти как',
-          maxLines: 3,
-          overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.center,
           style: TextStyle(
               color: ColorConstants.black,
+              fontWeight: FontWeight.w700,
               fontStyle: FontStyle.italic,
-              fontSize: 24),
+              fontSize: 20),
         ),
-        if (!team.contains(username))
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(primary: color),
-              onPressed: () {},
-              child: Text('Участник'),
-            ),
+            padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+            child: ButtonWidget(color: color, text: 'Участник', fun: !team.contains(username) ? () {} : null),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(primary: color),
-              onPressed: captain != null ? null : () {},
-              child: Text('Капитан'),
-            ),
+            padding: const EdgeInsets.fromLTRB(8, 4, 8, 16),
+            child: ButtonWidget(color: color, text: 'Капитан', fun: captain != null ? null : () {}),
           ),
       ],
+    );
+  }
+}
+
+class ButtonWidget extends StatelessWidget {
+  const ButtonWidget({
+    Key? key,
+    required this.color,
+    required this.text,
+    required this.fun,
+  }) : super(key: key);
+
+  final Color color;
+  final String text;
+  final VoidCallback? fun;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(primary: color),
+      onPressed: fun,
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+              color: ColorConstants.white,
+              fontWeight: FontWeight.w700,
+              fontStyle: FontStyle.italic,
+              fontSize: 30),
+        ),
+      ),
     );
   }
 }
