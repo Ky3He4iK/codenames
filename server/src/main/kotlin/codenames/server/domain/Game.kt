@@ -1,9 +1,7 @@
 package codenames.server.domain
 
-import javax.smartcardio.Card
-
-
 data class Game(
+    var id: Int = 0,
     var cards: List<Card>? = null,
     var hints: List<Hint>? = null,
     var status: String? = null,

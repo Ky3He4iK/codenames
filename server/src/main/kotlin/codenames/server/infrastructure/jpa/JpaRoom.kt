@@ -4,7 +4,7 @@ import org.springframework.lang.NonNull
 import javax.persistence.*
 
 @Entity
-class Room() {
+class JpaRoom() {
     @NonNull
     @Id
     @GeneratedValue
