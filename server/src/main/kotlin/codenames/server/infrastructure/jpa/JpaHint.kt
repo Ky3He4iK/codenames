@@ -7,10 +7,10 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Entity
-class JpaHint {
+data class JpaHint(
     @NonNull
     @Id
     @GeneratedValue
     @Column
     var id: Int = 0
-}
+)

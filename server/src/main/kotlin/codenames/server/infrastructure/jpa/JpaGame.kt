@@ -7,10 +7,10 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Entity
-class JpaGame {
+data class JpaGame(
     @NonNull
     @Id
     @GeneratedValue
     @Column
     var id: Int = 0
-}
+)
