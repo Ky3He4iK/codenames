@@ -1,6 +1,6 @@
-package codenames.server.room.repository
+package codenames.server.application.persistence
 
-import codenames.server.room.domain.Room
+import codenames.server.infrastructure.jpa.Room
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.mongodb.repository.Query
 import org.springframework.data.repository.query.Param
