@@ -9,13 +9,13 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Entity
-class JpaPlayer(
+data class JpaPlayer(
     @NonNull
     @Id
     @GeneratedValue
     @Column
-    var id: Int = 0,
-    var name: String? = null,
+    var id: Int,
+    var name: String,
     var team: TeamColor? = null,
     var role: UserRole? = null
 )
