@@ -1,17 +1,24 @@
 package codenames.server.infrastructure.jpa
 
+import codenames.server.domain.Game
 import codenames.server.domain.TeamColor
+import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.lang.NonNull
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
 
-@Entity
+@Document
 data class JpaCard(
-    @NonNull
-    @Id
-    @GeneratedValue
-    @Column
-    var id: Int = 0
+//    @NonNull
+//    @Id
+//    @GeneratedValue
+//    @Column(name = "card_id")
+    var cardId: Int = 0,
+    var text: String? = null,
+    var color: TeamColor? = null,
+    var state: String? = null,
+//    @ElementCollection
+//    @Column(name = "choiced_users")
+    var choicedUsers: List<Int>? = null,
+//    @ManyToOne
+//    @JoinColumn(name = "game_id")
+    var game: JpaGame
 )

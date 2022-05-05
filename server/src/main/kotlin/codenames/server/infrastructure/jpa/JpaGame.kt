@@ -1,16 +1,20 @@
 package codenames.server.infrastructure.jpa
 
-import org.springframework.lang.NonNull
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
-@Entity
+@Document
 data class JpaGame(
-    @NonNull
-    @Id
-    @GeneratedValue
-    @Column
-    var id: Int = 0
+//    @NonNull
+//    @Id
+//    @GeneratedValue
+//    @Column(name = "game_id")
+    var gameId: Int = 0,
+//    @Column(name = "cards")
+//    @OneToMany(mappedBy = "game")
+    var cards: List<JpaCard>? = null,
+//    @Column(name = "hints")
+//    @OneToMany(mappedBy = "game")
+    var hints: List<JpaHint>? = null,
+    var status: String? = null,
+    var nextTurnTime: Int = 0
 )

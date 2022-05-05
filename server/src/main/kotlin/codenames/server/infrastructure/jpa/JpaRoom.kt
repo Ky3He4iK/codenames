@@ -1,14 +1,12 @@
 package codenames.server.infrastructure.jpa
 
-import org.springframework.lang.NonNull
-import javax.persistence.*
 
-@Entity
+//@Entity
 class JpaRoom(
-    @NonNull
-    @Id
-    @GeneratedValue
-    @Column
+//    @NonNull
+//    @Id
+//    @GeneratedValue
+//    @Column
     var id: Int = 0
 ) {
 //    @OneToOne(mappedBy = "settings", orphanRemoval = true)
