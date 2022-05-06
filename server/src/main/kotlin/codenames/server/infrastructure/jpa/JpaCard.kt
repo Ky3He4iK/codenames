@@ -13,10 +13,5 @@ data class JpaCard(
     var text: String? = null,
     var color: TeamColor? = null,
     var state: String? = null,
-//    @ElementCollection
-//    @Column(name = "choiced_users")
-    var choicedUsers: List<Int>? = null,
-//    @ManyToOne
-//    @JoinColumn(name = "game_id")
-//    var game: JpaGame
+    var chosenUsers: List<Int>? = null
 )
