@@ -1,7 +1,7 @@
 package codenames.server.domain
 
-class Settings(
-    var id: Int = 0,
+class GameSettings(
+    var settingsId: Int = 0,
     var teamsCount: Int = 0,
     var turnTime: Int = 0,
     var cardCount: Int = 0,

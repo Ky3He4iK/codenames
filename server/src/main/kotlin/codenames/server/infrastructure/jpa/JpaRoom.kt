@@ -1,12 +1,12 @@
 package codenames.server.infrastructure.jpa
 
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
-//@Entity
+
+@Document
 class JpaRoom(
-//    @NonNull
-//    @Id
-//    @GeneratedValue
-//    @Column
+    @Id
     var id: Int = 0
 ) {
 //    @OneToOne(mappedBy = "settings", orphanRemoval = true)
