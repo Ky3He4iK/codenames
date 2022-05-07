@@ -3,26 +3,32 @@ import 'package:app/style/colors.dart';
 
 class TextWidget extends StatelessWidget {
   const TextWidget({
-    Key? key, required this.text, this.size: TextSize.NORMAL,
+    Key? key, required this.text, this.size: TextSize.NORMAL, this.color: ColorConstants.black, this.enableFit = true
   }) : super(key: key);
 
   final String text;
   final TextSize size;
+  final Color color;
+  final bool enableFit;
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-          color: ColorConstants.black,
-          fontStyle: FontStyle.italic,
-          fontWeight: FontWeight.w700,
-          fontSize: size.size),
+    return FittedBox(
+      fit: enableFit ? BoxFit.scaleDown : BoxFit.none,
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            color: color,
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.w700,
+            fontSize: size.size),
+      ),
     );
   }
 }
 enum TextSize {
-  BIG, NORMAL, SMALL
+  BIG, NORMAL, SMALL, HEADING_GAME
 
 }
 extension TextSizeExtension on TextSize {
@@ -33,6 +39,8 @@ extension TextSizeExtension on TextSize {
         return 54;
       case TextSize.SMALL:
         return 20;
+      case TextSize.HEADING_GAME:
+        return 36;
       default:
         return 28;
     }

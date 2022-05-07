@@ -1,3 +1,8 @@
+import 'dart:math';
+import 'dart:ui';
+
+import '../style/colors.dart';
+
 enum TeamColor { BLACK, WHITE, BLUE, RED, GREEN, YELLOW }
 
 enum UserRole { CAPTAIN, PLAYER, OBSERVER }
@@ -10,17 +15,17 @@ class Hint {
   Hint(this.word, this.number, this.team);
 }
 
-class Card {
+class CardInfo {
   String text;
   TeamColor color;
   String state;
   List<int> choicedUsers;
 
-  Card(this.text, this.color, this.state, this.choicedUsers);
+  CardInfo(this.text, this.color, this.state, this.choicedUsers);
 }
 
 class Game {
-  List<Card> cards;
+  List<CardInfo> cards;
   List<Hint> hints;
   String status;
   int nextTurnTime;
@@ -60,4 +65,40 @@ class Room {
 
   Room(this.roomId, this.settings, this.players, this.owner, this.inviteCode,
       this.type, this.name, this.game);
+}
+
+extension TeamColorExtension on TeamColor {
+
+  Color get color {
+    switch (this) {
+      case TeamColor.BLUE:
+        return ColorConstants.blue;
+      case TeamColor.RED:
+        return ColorConstants.red;
+      case TeamColor.GREEN:
+        return ColorConstants.green;
+      case TeamColor.YELLOW:
+        return ColorConstants.yellow;
+      case TeamColor.BLACK:
+        return ColorConstants.black;
+      default:
+        return ColorConstants.white;
+    }
+  }
+  Color get textColor {
+    switch (this) {
+      case TeamColor.BLUE:
+        return ColorConstants.white;
+      case TeamColor.RED:
+        return ColorConstants.white;
+      case TeamColor.GREEN:
+        return ColorConstants.white;
+      case TeamColor.YELLOW:
+        return ColorConstants.black;
+      case TeamColor.BLACK:
+        return ColorConstants.white;
+      default:
+        return ColorConstants.black;
+    }
+  }
 }
