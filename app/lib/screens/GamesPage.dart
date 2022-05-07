@@ -59,12 +59,13 @@ class _GamesPageState extends State<GamesPage> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Expanded(
+                              flex: 2,
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10.0),
                                     child: Image(image: AssetImage("assets/images/icon.png"))
                                 ),
                               ),
-                            Spacer(),
+                            Container(height: 20,),
                             Expanded(
                               child: TextField(
                                 textAlign: TextAlign.center,
