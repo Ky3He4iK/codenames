@@ -1,9 +1,9 @@
 package codenames.server
 
-import codenames.server.application.persistence.GameSettingsRepository
-import codenames.server.application.persistence.RoomRepository
-import codenames.server.infrastructure.jpa.JpaGameSettings
-import codenames.server.infrastructure.jpa.JpaRoom
+import codenames.server.application.persistence.*
+import codenames.server.domain.TeamColor
+import codenames.server.domain.UserRole
+import codenames.server.infrastructure.jpa.*
 import org.bson.types.ObjectId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
@@ -16,33 +16,38 @@ import org.springframework.data.repository.findByIdOrNull
 class ServerApplication: CommandLineRunner {
 
     @Autowired
-    lateinit var repository: GameSettingsRepository
-
+    lateinit var gameRepo: GameRepository
+    @Autowired
+    lateinit var playerRepo: PlayerRepository
+    @Autowired
+    lateinit var settingsRepo: GameSettingsRepository
+    @Autowired
+    lateinit var hintRepo: HintRepository
+    @Autowired
+    lateinit var cardRepo: CardRepository
     @Autowired
     lateinit var roomRepo: RoomRepository
-    override fun run(vararg args: String?) {
-        repository.deleteAll()
-        println(ObjectId.get())
-        repository.save(JpaGameSettings(ObjectId.get(), wordlistId = 1))
-//        repository.save(JpaGameSettings(ObjectId.get(),42))
-        var a = repository.findByWordlistId(1)
-        println(a)
-        repository.save(JpaGameSettings(a!!.settingsId, wordlistId = 999))
-//        a = repository.findByIdOrNull(999)
-        a = repository.findByWordlistId(999)
-        roomRepo.deleteAll()
-        val id = ObjectId.get()
-        roomRepo.save(JpaRoom(id, settingsId = a!!))
-        var b = roomRepo.findByIdOrNull(id)
-        println(b)
 
-//        println("Customers found with findAll():")
-//        println("-------------------------------")
-//        for (settings in repository!!.findAll()) {
-//            println(settings.settingsId)
-//            println(settings.wordlistId)
-//        }
-//        println()
+
+    override fun run(vararg args: String?) {
+        playerRepo.deleteAll()
+        val a = ObjectId.get()
+        val b = ObjectId.get()
+        playerRepo.save(JpaPlayer(a, "kekus", team = TeamColor.RED, role = UserRole.PLAYER))
+        playerRepo.save(JpaPlayer(b, "admin", team = TeamColor.BLUE, role = UserRole.CAPTAIN))
+
+        cardRepo.deleteAll()
+        val c = ObjectId.get()
+        val d = ObjectId.get()
+        cardRepo.save(JpaCard(c, color = TeamColor.BLACK,
+            chosenUsers = listOf(playerRepo.findByIdOrNull(a)!!, playerRepo.findByIdOrNull(b)!!)))
+        cardRepo.save(JpaCard(d, color = TeamColor.YELLOW,
+            chosenUsers = listOf(playerRepo.findByIdOrNull(b)!!)))
+
+//        gameRepo.deleteAll()
+//        gameRepo.save(JpaGame(ObjectId.get(), listOf()))
+
+
     }
 }
 

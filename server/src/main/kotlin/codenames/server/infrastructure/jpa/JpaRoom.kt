@@ -13,21 +13,21 @@ class JpaRoom(
     var roomId: ObjectId,
 
     @DBRef
-    var settingsId: JpaGameSettings
+    var settingsId: JpaGameSettings,
+
+    @DBRef
+    var players: List<JpaPlayer>? = null,
+
+    var owner: JpaPlayer? = null,
+
+    var inviteCode: String? = null,
+
+    var type: Int = 0,
+
+    var name: String? = null,
+    
+    @DBRef
+    var game: JpaGame? = null
 ) {
-//    @OneToOne(mappedBy = "settings", orphanRemoval = true)
-//    @Column
-//    var settings: Settings = Settings()
-//
-//    var players: List<Player>? = null
-//
-//    var owner: Player? = null
-//
-//    var inviteCode: String? = null
-//
-//    var type = 0
-//
-//    var name: String? = null
-//
-//    var game: Game? = null
+
 }
