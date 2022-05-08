@@ -1,8 +1,8 @@
 package codenames.server
 
 import codenames.server.application.persistence.*
-import codenames.server.domain.TeamColor
-import codenames.server.domain.UserRole
+import codenames.server.domain.enums.TeamColor
+import codenames.server.domain.enums.UserRole
 import codenames.server.infrastructure.jpa.*
 import org.bson.types.ObjectId
 import org.springframework.beans.factory.annotation.Autowired

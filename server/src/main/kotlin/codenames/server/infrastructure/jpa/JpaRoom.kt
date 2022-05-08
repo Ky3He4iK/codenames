@@ -12,12 +12,12 @@ class JpaRoom(
     @Id
     var roomId: ObjectId,
 
-    @DBRef
     var settingsId: JpaGameSettings,
 
     @DBRef
     var players: List<JpaPlayer>? = null,
 
+    @DBRef
     var owner: JpaPlayer? = null,
 
     var inviteCode: String? = null,
@@ -25,7 +25,7 @@ class JpaRoom(
     var type: Int = 0,
 
     var name: String? = null,
-    
+
     @DBRef
     var game: JpaGame? = null
 ) {
