@@ -41,11 +41,11 @@ class ServerApplication: CommandLineRunner {
         val c = ObjectId.get()
         val d = ObjectId.get()
         cardRepo.save(
-            JpaCard(c, gameColor = GameColor.BLACK,
+            JpaCard(c, cardColor = GameColor.BLACK,
             chosenUsers = listOf(playerRepo.findByIdOrNull(a)!!, playerRepo.findByIdOrNull(b)!!))
         )
         cardRepo.save(
-            JpaCard(d, gameColor = GameColor.YELLOW,
+            JpaCard(d, cardColor = GameColor.YELLOW,
             chosenUsers = listOf(playerRepo.findByIdOrNull(b)!!))
         )
 
