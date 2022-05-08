@@ -11,11 +11,15 @@ class WordCard extends StatefulWidget {
     required this.isOpened,
     required this.teamColor,
     required this.guesses,
+    required this.onTap,
+    required this.onLongPress,
   }) : super(key: key);
   final CardInfo card;
   bool isOpened;
   final Color teamColor;
   int guesses;
+  VoidCallback? onTap;
+  VoidCallback? onLongPress;
   @override
   State<WordCard> createState() => _WordCardState();
 }
@@ -27,17 +31,8 @@ class _WordCardState  extends State<WordCard>  {
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
-        onTap: () {
-          setState(() {
-            widget.guesses += isTappedByMe ? -1 : 1;
-            isTappedByMe = !isTappedByMe;
-          });
-        },
-        onLongPress: () {
-          setState(() {
-            widget.isOpened = !widget.isOpened;
-          });
-        },
+        onTap: widget.onTap,
+        onLongPress: widget.onLongPress,
         child: Card(
           color: widget.isOpened ? widget.card.color.color : ColorConstants.grey,
           shape: RoundedRectangleBorder(
