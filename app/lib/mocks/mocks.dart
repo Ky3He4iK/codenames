@@ -1,17 +1,24 @@
 import 'dart:math';
 
 import 'package:app/entity/entities.dart';
+import 'package:app/style/colors.dart';
 
 class Mocks {
   static Room getRoom() {
+    int cardCount = 42;
+    int blackCardCount = 3;
+    int whiteCardCount = 4;
+    int teamsCount = 4;
+    int time = 60*1000;
+    int nextTime = DateTime.now().millisecondsSinceEpoch  + time;
     return Room(
         1,
         Settings(
-          4,
-          60,
-          42,
-          5,
-          5,
+          teamsCount,
+          time,
+          cardCount,
+          blackCardCount,
+          whiteCardCount,
         ),
         [
           Player(
@@ -78,31 +85,49 @@ class Mocks {
         "FFFFFF",
         0,
         "TestRoom",
-        null);
+        Game(
+            randomCards(cardCount, blackCardCount, whiteCardCount, teamsCount),
+            hints(teamsCount),
+            "Status",
+            nextTime,
+        )
+    );
   }
 
   static List<String> words = [
     "АГЕНТ", "АКТ", "АКЦИЯ", "АЛЬБОМ", "АМФИБИЯ", "АППАРАТ", "БАБОЧКА", "БАЗА", "БАНК", "БАНЯ", "БАР", "БАРЬЕР", "БАССЕЙН", "БАТАРЕЯ", "БАШНЯ", "БЕЛОК", "БЕРЁЗА", "БИЛЕТ", "БИРЖА", "БЛОК", "БОБ"
   ];
 
-  static List<CardInfo> randomCards(int count) {
+  static List<CardInfo> randomCards(int count, int black, int white, int teamsCount) {
     final _random = Random();
+    int eachTeamColorCount = (count - black - white) ~/ teamsCount;
+    white += (count - black - white) % teamsCount;
     List<CardInfo> cards = [];
-    for (var i = 0; i < count; i++) {
+    for (var i = 0; i < white; i++) {
       var word = words[_random.nextInt(words.length)];
-      var color = TeamColor.values[_random.nextInt(TeamColor.values.length)];
-      cards.add(CardInfo(word, color, "OPEN", [0, 1, 2]));
+      cards.add(CardInfo(word, TeamColor.WHITE, false, []));
     }
+    for (var i = 0; i < black; i++) {
+      var word = words[_random.nextInt(words.length)];
+      cards.add(CardInfo(word, TeamColor.BLACK, false, []));
+    }
+    for (var i = 0; i < teamsCount; i++) {
+      for (var j = 0; j < eachTeamColorCount; j++) {
+        var word = words[_random.nextInt(words.length)];
+        cards.add(CardInfo(word, TeamColor.values[i], false, []));
+      }
+    }
+    cards.shuffle(_random);
     return cards;
   }
 
-  static List<List<String>> hints(int teamCount) {
+  static List<Hint> hints(int teamCount) {
     final _random = Random();
-    List<List<String>> hints = [];
+    List<Hint> hints = [];
     for (var i = 0; i < teamCount; i++) {
-      hints.add([]);
       for (var j = 0; j < _random.nextInt(10); j++) {
-        hints[i].add(words[_random.nextInt(words.length)] + " " + _random.nextInt(5).toString());
+        Hint h = Hint(words[_random.nextInt(words.length)], _random.nextInt(5), TeamColor.values[i]);
+        hints.add(h);
       }
     }
     return hints;

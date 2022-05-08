@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:app/style/colors.dart';
 
 class TextWidget extends StatelessWidget {
-  const TextWidget({
+  TextWidget({
     Key? key, required this.text, this.size: TextSize.NORMAL, this.color: ColorConstants.black, this.enableFit = true
   }) : super(key: key);
 
+  TextWidget.c(this.text, this.size) : super() {
+    color = ColorConstants.black;
+    enableFit = true;
+  }
   final String text;
   final TextSize size;
-  final Color color;
-  final bool enableFit;
+  late Color color;
+  late bool enableFit;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +42,23 @@ extension TextSizeExtension on TextSize {
       case TextSize.BIG:
         return 54;
       case TextSize.SMALL:
-        return 20;
+        return 18;
       case TextSize.HEADING_GAME:
         return 36;
       default:
         return 28;
+    }
+  }
+  FontWeight get weight {
+    switch (this) {
+      case TextSize.BIG:
+        return FontWeight.w900;
+      case TextSize.SMALL:
+        return FontWeight.w200;
+      case TextSize.HEADING_GAME:
+        return FontWeight.w700;
+      default:
+        return FontWeight.w700;
     }
   }
 

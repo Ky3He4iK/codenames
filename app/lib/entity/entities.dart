@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import '../style/colors.dart';
 
-enum TeamColor { BLACK, WHITE, BLUE, RED, GREEN, YELLOW }
+enum TeamColor { BLUE, RED, GREEN, YELLOW, BLACK, WHITE, }
 
 enum UserRole { CAPTAIN, PLAYER, OBSERVER }
 
@@ -13,15 +13,19 @@ class Hint {
   TeamColor team;
 
   Hint(this.word, this.number, this.team);
+
+  String getText() {
+    return word + " " + number.toString();
+  }
 }
 
 class CardInfo {
   String text;
   TeamColor color;
-  String state;
+  bool isOpened;
   List<int> choicedUsers;
 
-  CardInfo(this.text, this.color, this.state, this.choicedUsers);
+  CardInfo(this.text, this.color, this.isOpened, this.choicedUsers);
 }
 
 class Game {
