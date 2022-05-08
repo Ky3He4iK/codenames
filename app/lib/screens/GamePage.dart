@@ -1,12 +1,10 @@
+import 'package:app/entity/entities.dart';
 import 'package:app/mocks/mocks.dart';
-import 'package:app/ui_models/models.dart';
+import 'package:app/widget/card.dart';
 import 'package:app/widget/cards_field.dart';
 import 'package:app/widget/game_top_bar_widget.dart';
 import 'package:app/widget/hint_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:app/widget/card.dart';
-import 'package:app/style/colors.dart';
-import 'package:app/entity/entities.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage() : super();

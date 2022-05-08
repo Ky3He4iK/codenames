@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:app/style/colors.dart';
+import 'package:flutter/material.dart';
 
 class TextWidget extends StatelessWidget {
   TextWidget({

@@ -1,7 +1,7 @@
+import 'package:app/style/colors.dart';
 import 'package:app/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:app/style/colors.dart';
 
 class TextFieldWidget extends StatelessWidget {
   TextFieldWidget({
@@ -12,10 +12,16 @@ class TextFieldWidget extends StatelessWidget {
     this.size = TextSize.NORMAL,
   }) : super(key: key);
 
-  final bool isNumber;
+  TextFieldWidget.c(
+    this.hintText,
+  ) : super() {
+    this.isNumber = false;
+    this.size = TextSize.NORMAL;
+  }
+  late bool isNumber;
   List<FilteringTextInputFormatter>? formatters;
   String hintText;
-  TextSize size;
+  late TextSize size;
 
   @override
   Widget build(BuildContext context) {

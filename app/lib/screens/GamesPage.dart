@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:app/style/colors.dart';
+import 'package:app/widget/card.dart';
 import 'package:app/widget/room_widget.dart';
+import 'package:app/widget/square_button.dart';
 import 'package:app/widget/text_field_widget.dart';
 import 'package:app/widget/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:app/widget/card.dart';
-import 'package:app/style/colors.dart';
-import 'package:app/widget/square_button.dart';
 
 class GamesPage extends StatefulWidget {
   const GamesPage() : super();
@@ -59,34 +59,22 @@ class _GamesPageState extends State<GamesPage> {
                   flex: 2,
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(10.0),
-                      child:
-                          Image(image: AssetImage("assets/images/icon.png"))),
+                      child: Image(image: AssetImage("assets/images/icon.png"))),
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFieldWidget(
-                      hintText: 'User#1238',
-                    ),
-                  ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextFieldWidget.c('User#1238'),
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFieldWidget(
-                      hintText: 'Код входа',
-                    ),
-                  ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextFieldWidget.c('Код входа'),
                 ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/team');
-                        },
-                        style: ElevatedButton.styleFrom(
-                            primary: ColorConstants.green),
+                        onPressed: () {Navigator.pushNamed(context, '/team');},
+                        style: ElevatedButton.styleFrom(primary: ColorConstants.green),
                         child: Padding(
                           padding: EdgeInsets.all(8),
                           child: TextWidget(
@@ -100,13 +88,8 @@ class _GamesPageState extends State<GamesPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 8),
                     child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            gameCreation = !gameCreation;
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                            primary: ColorConstants.red),
+                        onPressed: () {setState(() {gameCreation = !gameCreation;});},
+                        style: ElevatedButton.styleFrom(primary: ColorConstants.red),
                         child: Padding(
                           padding: const EdgeInsets.all(8),
                           child: TextWidget(
@@ -133,9 +116,7 @@ class _GamesPageState extends State<GamesPage> {
             TextWidget(text: "Создание комнаты"),
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: TextFieldWidget(
-                hintText: 'Название',
-              ),
+              child: TextFieldWidget.c('Название'),
             ),
             Container(
               height: 70,
@@ -144,27 +125,15 @@ class _GamesPageState extends State<GamesPage> {
                 children: [
                   SquareButtonWidget(
                     pic: "assets/images/open.svg",
-                    fun: () {
-                      setState(() {
-                        gameOpened = true;
-                      });
-                    },
-                    color:
-                        gameOpened ? ColorConstants.green : ColorConstants.grey,
+                    fun: () {setState(() {gameOpened = true;});},
+                    color: gameOpened ? ColorConstants.green : ColorConstants.grey,
                     colorSvg: ColorConstants.white,
                   ),
-                  Container(
-                    width: 20,
-                  ),
+                  Container(width: 20),
                   SquareButtonWidget(
                     pic: "assets/images/close.svg",
-                    fun: () {
-                      setState(() {
-                        gameOpened = false;
-                      });
-                    },
-                    color:
-                        !gameOpened ? ColorConstants.red : ColorConstants.grey,
+                    fun: () {setState(() {gameOpened = false;});},
+                    color: !gameOpened ? ColorConstants.red : ColorConstants.grey,
                   ),
                 ],
               ),
@@ -172,16 +141,12 @@ class _GamesPageState extends State<GamesPage> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/team');
-                  },
-                  style:
-                      ElevatedButton.styleFrom(primary: ColorConstants.green),
+                  onPressed: () {Navigator.pushNamed(context, '/team');},
+                  style: ElevatedButton.styleFrom(primary: ColorConstants.yellow),
                   child: Padding(
                     padding: EdgeInsets.all(8),
                     child: TextWidget(
                         text: "Создать комнату",
-                        color: ColorConstants.white,
                         enableFit: false),
                   )),
             ),
@@ -200,11 +165,7 @@ class _GamesPageState extends State<GamesPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Expanded(
-                  child: TextFieldWidget(
-                    hintText: 'Найти...',
-                  ),
-                ),
+                Expanded(child: TextFieldWidget(hintText: 'Найти...')),
                 Expanded(
                     flex: 5,
                     child: SingleChildScrollView(
@@ -217,8 +178,8 @@ class _GamesPageState extends State<GamesPage> {
                                   RoomWidget(
                                       name: "Название",
                                       isPaused: Random().nextBool(),
-                                      usersCount: i % 11),
-                              ],
+                                      usersCount: i % 11)
+                              ]
                             )
                         ],
                       ),

@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:app/entity/entities.dart';
-import 'package:app/style/colors.dart';
 
 class Mocks {
   static Room getRoom() {

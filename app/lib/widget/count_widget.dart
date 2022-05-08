@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../style/colors.dart';
-import 'text_widget.dart';
 import 'square_button.dart';
+import 'text_widget.dart';
 
 class CountWidget extends StatefulWidget {
   CountWidget({Key? key, required this.color, required this.text,}) : super(key: key);

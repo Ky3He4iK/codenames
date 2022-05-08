@@ -1,8 +1,8 @@
 
+import 'package:app/style/colors.dart';
+import 'package:app/widget/card.dart';
 import 'package:app/widget/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:app/widget/card.dart';
-import 'package:app/style/colors.dart';
 import 'package:flutter_svg/svg.dart';
 
 class RoomWidget extends StatelessWidget {

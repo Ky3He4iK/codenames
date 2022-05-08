@@ -2,8 +2,6 @@
 
 import 'dart:ui';
 
-import 'package:app/style/colors.dart';
-
 class SquareButtonModel {
   String picturePath;
   Color buttonColor;
