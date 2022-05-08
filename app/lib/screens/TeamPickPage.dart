@@ -20,7 +20,7 @@ class TeamPickPage extends StatefulWidget {
 
 class _TeamPickPageState extends State<TeamPickPage> {
   late Room room;
-  List<TeamColor> colors = TeamColorExtension.forTeams();
+  List<GameColor> colors = TeamColorExtension.forTeams();
   List<SquareButtonModel> menuButtons = [];
   late SquareButtonModel gameModel;
 

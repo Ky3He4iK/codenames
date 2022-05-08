@@ -15,7 +15,7 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   late Room room;
-  List<TeamColor> colors = TeamColorExtension.forTeams();
+  List<GameColor> colors = TeamColorExtension.forTeams();
   late int pickedHintListIndex;
 
   @override

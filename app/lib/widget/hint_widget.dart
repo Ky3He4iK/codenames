@@ -14,7 +14,7 @@ class HintWidget extends StatelessWidget {
   }) : super(key: key);
 
   final List<Hint> hints;
-  final TeamColor teamColor;
+  final GameColor teamColor;
   bool isOpened;
 
   @override

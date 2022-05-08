@@ -17,7 +17,7 @@ class GameTopBarWidget extends StatefulWidget {
   }) : super(key: key);
 
   final Room room;
-  final List<TeamColor> colors;
+  final List<GameColor> colors;
   @override
   State<GameTopBarWidget> createState() => _GameTopBarWidgetState();
 }

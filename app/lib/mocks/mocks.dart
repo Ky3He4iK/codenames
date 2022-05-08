@@ -23,62 +23,62 @@ class Mocks {
           Player(
             1,
             "User1",
-            TeamColor.BLUE,
+            GameColor.BLUE,
             UserRole.CAPTAIN,
           ),
           Player(
             2,
             "User2",
-            TeamColor.BLUE,
+            GameColor.BLUE,
             UserRole.PLAYER,
           ),
           Player(
             3,
             "User3",
-            TeamColor.BLUE,
+            GameColor.BLUE,
             UserRole.PLAYER,
           ),
           Player(
             4,
             "User4",
-            TeamColor.RED,
+            GameColor.RED,
             UserRole.CAPTAIN,
           ),
           Player(
             5,
             "User5",
-            TeamColor.RED,
+            GameColor.RED,
             UserRole.PLAYER,
           ),
           Player(
             6,
             "User6",
-            TeamColor.YELLOW,
+            GameColor.YELLOW,
             UserRole.PLAYER,
           ),
           Player(
             7,
             "User7",
-            TeamColor.YELLOW,
+            GameColor.YELLOW,
             UserRole.PLAYER,
           ),
           Player(
             8,
             "User8",
-            TeamColor.YELLOW,
+            GameColor.YELLOW,
             UserRole.PLAYER,
           ),
           Player(
             8,
             "User9",
-            TeamColor.GREEN,
+            GameColor.GREEN,
             UserRole.CAPTAIN,
           ),
         ],
         Player(
           1,
           "User2",
-          TeamColor.BLUE,
+          GameColor.BLUE,
           UserRole.PLAYER,
         ),
         "FFFFFF",
@@ -104,16 +104,16 @@ class Mocks {
     List<CardInfo> cards = [];
     for (var i = 0; i < white; i++) {
       var word = words[_random.nextInt(words.length)];
-      cards.add(CardInfo(word, TeamColor.WHITE, false, []));
+      cards.add(CardInfo(word, GameColor.WHITE, false, []));
     }
     for (var i = 0; i < black; i++) {
       var word = words[_random.nextInt(words.length)];
-      cards.add(CardInfo(word, TeamColor.BLACK, false, []));
+      cards.add(CardInfo(word, GameColor.BLACK, false, []));
     }
     for (var i = 0; i < teamsCount; i++) {
       for (var j = 0; j < eachTeamColorCount; j++) {
         var word = words[_random.nextInt(words.length)];
-        cards.add(CardInfo(word, TeamColor.values[i], false, []));
+        cards.add(CardInfo(word, GameColor.values[i], false, []));
       }
     }
     cards.shuffle(_random);
@@ -125,7 +125,7 @@ class Mocks {
     List<Hint> hints = [];
     for (var i = 0; i < teamCount; i++) {
       for (var j = 0; j < _random.nextInt(10); j++) {
-        Hint h = Hint(words[_random.nextInt(words.length)], _random.nextInt(5), TeamColor.values[i]);
+        Hint h = Hint(words[_random.nextInt(words.length)], _random.nextInt(5), GameColor.values[i]);
         hints.add(h);
       }
     }
