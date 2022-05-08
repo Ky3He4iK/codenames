@@ -6,7 +6,7 @@ data class Room(
     var players: List<Player>? = null,
     var owner: Player? = null,
     var inviteCode: String? = null,
-    var type: Int = 0,
+    var isPrivate: Boolean = true,
     var name: String? = null,
     var game: Game? = null
 )

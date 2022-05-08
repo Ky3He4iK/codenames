@@ -1,7 +1,9 @@
 package codenames.server.domain
 
+import org.bson.types.ObjectId
+
 class GameSettings(
-    var settingsId: Int = 0,
+    var settingsId: ObjectId,
     var teamsCount: Int = 0,
     var turnTime: Int = 0,
     var cardCount: Int = 0,

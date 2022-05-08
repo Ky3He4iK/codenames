@@ -1,6 +1,5 @@
 package codenames.server.infrastructure.jpa
 
-import codenames.server.domain.GameSettings
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.DBRef
@@ -12,7 +11,7 @@ class JpaRoom(
     @Id
     var roomId: ObjectId,
 
-    var settingsId: JpaGameSettings,
+    var settings: JpaGameSettings,
 
     @DBRef
     var players: List<JpaPlayer>? = null,
@@ -22,7 +21,7 @@ class JpaRoom(
 
     var inviteCode: String? = null,
 
-    var type: Int = 0,
+    var isPrivate: Boolean,
 
     var name: String? = null,
 

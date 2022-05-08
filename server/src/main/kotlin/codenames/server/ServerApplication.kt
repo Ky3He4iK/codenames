@@ -3,7 +3,8 @@ package codenames.server
 import codenames.server.application.persistence.*
 import codenames.server.domain.enums.TeamColor
 import codenames.server.domain.enums.UserRole
-import codenames.server.infrastructure.jpa.*
+import codenames.server.infrastructure.jpa.JpaCard
+import codenames.server.infrastructure.jpa.JpaPlayer
 import org.bson.types.ObjectId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
@@ -39,10 +40,14 @@ class ServerApplication: CommandLineRunner {
         cardRepo.deleteAll()
         val c = ObjectId.get()
         val d = ObjectId.get()
-        cardRepo.save(JpaCard(c, color = TeamColor.BLACK,
-            chosenUsers = listOf(playerRepo.findByIdOrNull(a)!!, playerRepo.findByIdOrNull(b)!!)))
-        cardRepo.save(JpaCard(d, color = TeamColor.YELLOW,
-            chosenUsers = listOf(playerRepo.findByIdOrNull(b)!!)))
+        cardRepo.save(
+            JpaCard(c, color = TeamColor.BLACK,
+            chosenUsers = listOf(playerRepo.findByIdOrNull(a)!!, playerRepo.findByIdOrNull(b)!!))
+        )
+        cardRepo.save(
+            JpaCard(d, color = TeamColor.YELLOW,
+            chosenUsers = listOf(playerRepo.findByIdOrNull(b)!!))
+        )
 
 //        gameRepo.deleteAll()
 //        gameRepo.save(JpaGame(ObjectId.get(), listOf()))

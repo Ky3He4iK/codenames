@@ -14,7 +14,7 @@ data class JpaGame(
     var cards: List<JpaCard>? = null,
     var hints: List<JpaHint>? = null,
     var status: GameStatus,
-    var turnStatus: TurnStatus,
-    var curTeamColor: TeamColor,
+    var turnStatus: TurnStatus?,
+    var curTeamColor: TeamColor?,
     var nextTurnTime: Int = 0
 )
