@@ -164,6 +164,7 @@ class _GamePageState extends State<GamePage> {
         teamColor: me.team.color,
         guesses: card.choicedUsers.length,
         onTap: () {
+          //TODO ТУТ ОТПРАВЛЯТЬ, ЧТО ПОЛЬЗОВАТЕЛЬ ВЫБРАЛ КАРТОЧКУ
           if (me.team == room.game!.curTeamColor && room.game!.status == GameStatus.PLAYING) {
             setState(() {
               List<int> players = card.choicedUsers;
@@ -176,6 +177,7 @@ class _GamePageState extends State<GamePage> {
           }
         },
         onLongPress: () {
+          // TODO ПЕРЕНЕСТИ ВСЕ В onTap(), А ЭТО СНЕСТИ, Т.К. ВРЕМЕННЫЙ ВАРИАНТ ДЛЯ ПОКАЗА НАЖАТИЯ
           if (me.team == room.game!.curTeamColor && room.game!.status == GameStatus.PLAYING) {
             setState(() {
               var isOpened = room.game!.cards[i].isOpened;

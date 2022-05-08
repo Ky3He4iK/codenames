@@ -2,6 +2,7 @@ import 'package:app/entity/entities.dart';
 import 'package:app/mocks/mocks.dart';
 import 'package:app/style/colors.dart';
 import 'package:app/ui_models/models.dart';
+import 'package:app/utils/settings_utils.dart';
 import 'package:app/widget/card.dart';
 import 'package:app/widget/count_widget.dart';
 import 'package:app/widget/square_button.dart';
@@ -10,6 +11,7 @@ import 'package:app/widget/text_field_widget.dart';
 import 'package:app/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:math';
 
 class TeamPickPage extends StatefulWidget {
   const TeamPickPage() : super();
@@ -91,10 +93,38 @@ class _TeamPickPageState extends State<TeamPickPage> {
                 ],
               ),
               const Spacer(),
-              CountWidget(text: 'Команды', color: ColorConstants.blue, count: room.settings.teamsCount),
-              CountWidget(text: 'Размер поля', color: ColorConstants.green, count: room.settings.cardCount),
-              CountWidget(text: 'Белые карты', color: ColorConstants.yellow, count: room.settings.whiteCardCount),
-              CountWidget(text: 'Черные карты', color: ColorConstants.red, count: room.settings.blackCardCount),
+              CountWidget(
+                  text: 'Команды',
+                  color: ColorConstants.blue,
+                  count: room.settings.teamsCount,
+                  onChanged: (i) {changeSettings(teams: i);}
+              ),
+              CountWidget(
+                  text: 'Размер поля',
+                  color: ColorConstants.green,
+                  count: room.settings.cardCount,
+                  onChanged: (i) {changeSettings(cards: i);}
+              ),
+              CountWidget(
+                  text: 'Белые карты',
+                  color: ColorConstants.yellow,
+                  count: room.settings.whiteCardCount,
+                  onChanged: (i) {changeSettings(white: i);}
+              ),
+              CountWidget(
+                  text: 'Черные карты',
+                  color: ColorConstants.red,
+                  count: room.settings.blackCardCount,
+                  onChanged: (i) {changeSettings(black: i);}
+              ),
+              const Spacer(),
+              ElevatedButton(
+                  onPressed: () { print("saved");}, //TODO сохранить в сеть
+                  style: ElevatedButton.styleFrom(primary: ColorConstants.green),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: TextWidget(text: "Сохранить", color: ColorConstants.white),
+                  )),
               const Spacer()
             ],
           ),
@@ -102,6 +132,33 @@ class _TeamPickPageState extends State<TeamPickPage> {
       ),
       color: ColorConstants.black,
     );
+  }
+
+  void changeSettings({int? teams, int? cards, int? white, int? black,}) {
+    //TODO Может быть переписать? Работает, но if'ов много
+    setState(() {
+      if (teams != null && 1 < teams && teams < 5) {
+        room.settings.teamsCount = teams;
+      }
+      if (cards != null) {
+        room.settings.cardCount = Utils.getField(room.settings.cardCount, cards);
+      }
+      int maxValForWhite = room.settings.cardCount - room.settings.blackCardCount - room.settings.teamsCount;
+      int maxValForBlack = room.settings.cardCount - room.settings.whiteCardCount - room.settings.teamsCount;
+      if (white != null && white <= maxValForWhite && white > -1) {
+        room.settings.whiteCardCount = white;
+      }
+      if (black != null && black <= maxValForBlack && black > -1) {
+        room.settings.blackCardCount = black;
+      }
+      if (maxValForBlack < room.settings.blackCardCount) {
+        room.settings.blackCardCount = max(0, min(maxValForBlack, room.settings.blackCardCount));
+      }
+      maxValForWhite = room.settings.cardCount - room.settings.blackCardCount - room.settings.teamsCount;
+      if (maxValForWhite < room.settings.whiteCardCount) {
+        room.settings.whiteCardCount = max(0, min(maxValForWhite, room.settings.whiteCardCount));
+      }
+    });
   }
 
   Expanded teamsCards() {
@@ -112,7 +169,7 @@ class _TeamPickPageState extends State<TeamPickPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             for (var i = 0; i < room.settings.teamsCount; i++)
-              TeamCardWidget(playerName, colors[i].color,
+              TeamCardWidget(playerName, colors[i],
                   room.players.where((p) => p.team == colors[i]).toList()),
           ],
         ));

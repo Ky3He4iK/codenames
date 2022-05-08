@@ -4,22 +4,12 @@ import '../style/colors.dart';
 import 'square_button.dart';
 import 'text_widget.dart';
 
-class CountWidget extends StatefulWidget {
-  const CountWidget({Key? key, required this.color, required this.text, required this.count,}) : super(key: key);
+class CountWidget extends StatelessWidget {
+  CountWidget({Key? key, required this.color, required this.text, required this.count, this.onChanged,}) : super(key: key);
+  final int count;
   final Color color;
   final String text;
-  final int count;
-  @override
-  State<CountWidget> createState() => _CountWidget();
-}
-class _CountWidget extends State<CountWidget> {
-  int count = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    count = widget.count;
-  }
+  final Function? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +17,7 @@ class _CountWidget extends State<CountWidget> {
       fit: BoxFit.fitWidth,
       child: Column(
         children: [
-          Center(child: TextWidget(text: widget.text, size: TextSize.NORMAL)),
+          Center(child: TextWidget(text: text, size: TextSize.NORMAL)),
           SizedBox(
               height: 60,
               child: Row(
@@ -36,12 +26,11 @@ class _CountWidget extends State<CountWidget> {
                 children: [
                   SquareButtonWidget(
                     pic: 'assets/images/minus.svg',
-                    color: widget.color,
+                    color: color,
                     colorSvg: ColorConstants.white,
                     fun: () {
-                      setState(() {
-                        count--;
-                      });
+                      int c = count - 1;
+                      onChanged!(c);
                     },
                   ),
                   Padding(
@@ -50,12 +39,11 @@ class _CountWidget extends State<CountWidget> {
                   ),
                   SquareButtonWidget(
                     pic: 'assets/images/plus.svg',
-                    color: widget.color,
+                    color: color,
                     colorSvg: ColorConstants.white,
                     fun: () {
-                      setState(() {
-                        count++;
-                      });
+                      int c = count + 1;
+                      onChanged!(c);
                     },
                   ),
                 ],

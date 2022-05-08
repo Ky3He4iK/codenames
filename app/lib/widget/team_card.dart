@@ -6,7 +6,7 @@ import 'card.dart';
 import 'text_widget.dart';
 
 class TeamCardWidget extends StatelessWidget {
-  final Color color;
+  final GameColor color;
   late List<String> team;
   String? captain;
   final String username;
@@ -28,13 +28,13 @@ class TeamCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardWidget(
-        color: color,
+        color: color.color,
         child: Expanded(
             child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TeamListWidget(captain: captain, team: team, username: username, color: color),
+              TeamListWidget(captain: captain, team: team, username: username, color: color.color),
               JoinWidget(team: team, username: username, color: color, captain: captain),
             ],
         )));
@@ -113,7 +113,7 @@ class JoinWidget extends StatelessWidget {
 
   final List<String> team;
   final String username;
-  final Color color;
+  final GameColor color;
   final String? captain;
 
   @override
@@ -152,22 +152,22 @@ class ButtonWidget extends StatelessWidget {
     required this.fun,
   }) : super(key: key);
 
-  final Color color;
+  final GameColor color;
   final String text;
   final VoidCallback? fun;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(primary: color),
+      style: ElevatedButton.styleFrom(primary: color.color),
       onPressed: fun,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Text(
           text,
           textAlign: TextAlign.center,
-          style: const TextStyle(
-              color: ColorConstants.white,
+          style: TextStyle(
+              color: color.textColor,
               fontWeight: FontWeight.w700,
               fontStyle: FontStyle.italic,
               fontSize: 30),
