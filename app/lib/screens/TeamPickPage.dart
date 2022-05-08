@@ -20,10 +20,10 @@ class TeamPickPage extends StatefulWidget {
 
 class _TeamPickPageState extends State<TeamPickPage> {
   late Room room;
-  List<GameColor> colors = TeamColorExtension.forTeams();
+  List<GameColor> colors = GameColorExtension.forTeams();
   List<SquareButtonModel> menuButtons = [];
   late SquareButtonModel gameModel;
-
+  String playerName = "User2";
   @override
   void initState() {
     super.initState();
@@ -86,15 +86,15 @@ class _TeamPickPageState extends State<TeamPickPage> {
                       FilteringTextInputFormatter.allow(
                           RegExp(r"\b([1-9]|[1-9][0-9])\b"))
                     ],
-                    hintText: '80 сек.',
+                    hintText: '80.',
                   ),
                 ],
               ),
               const Spacer(),
-              const CountWidget(text: 'Команды', color: ColorConstants.blue),
-              const CountWidget(text: 'Размер поля', color: ColorConstants.green),
-              const CountWidget(text: 'Белые карты', color: ColorConstants.yellow),
-              const CountWidget(text: 'Черные карты', color: ColorConstants.red),
+              CountWidget(text: 'Команды', color: ColorConstants.blue, count: room.settings.teamsCount),
+              CountWidget(text: 'Размер поля', color: ColorConstants.green, count: room.settings.cardCount),
+              CountWidget(text: 'Белые карты', color: ColorConstants.yellow, count: room.settings.whiteCardCount),
+              CountWidget(text: 'Черные карты', color: ColorConstants.red, count: room.settings.blackCardCount),
               const Spacer()
             ],
           ),
@@ -112,7 +112,7 @@ class _TeamPickPageState extends State<TeamPickPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             for (var i = 0; i < room.settings.teamsCount; i++)
-              TeamCardWidget("User2", colors[i].color,
+              TeamCardWidget(playerName, colors[i].color,
                   room.players.where((p) => p.team == colors[i]).toList()),
           ],
         ));

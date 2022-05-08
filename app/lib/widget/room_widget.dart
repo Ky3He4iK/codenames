@@ -26,7 +26,7 @@ class RoomWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child:
-                TextWidget(text: "Название", size: TextSize.HEADING_GAME),
+                TextWidget(text: name, size: TextSize.HEADING_GAME),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),

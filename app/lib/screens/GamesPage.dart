@@ -170,7 +170,7 @@ class _GamesPageState extends State<GamesPage> {
                             Row(
                               children: [
                                 for (int j = 0; j < 2; j++)
-                                  RoomWidget(
+                                  RoomWidget( //TODO  Забирать с сервера список игр
                                       name: "Название",
                                       isPaused: Random().nextBool(),
                                       usersCount: i % 11)
