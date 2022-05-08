@@ -1,7 +1,7 @@
 package codenames.server.infrastructure.jpa
 
 import codenames.server.domain.enums.GameStatus
-import codenames.server.domain.enums.TeamColor
+import codenames.server.domain.enums.GameColor
 import codenames.server.domain.enums.TurnStatus
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
@@ -15,6 +15,6 @@ data class JpaGame(
     var hints: List<JpaHint>? = null,
     var status: GameStatus,
     var turnStatus: TurnStatus?,
-    var curTeamColor: TeamColor?,
+    var curTeamColor: GameColor?,
     var nextTurnTime: Int = 0
 )

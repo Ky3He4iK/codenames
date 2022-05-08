@@ -1,7 +1,7 @@
 package codenames.server
 
 import codenames.server.application.persistence.*
-import codenames.server.domain.enums.TeamColor
+import codenames.server.domain.enums.GameColor
 import codenames.server.domain.enums.UserRole
 import codenames.server.infrastructure.jpa.JpaCard
 import codenames.server.infrastructure.jpa.JpaPlayer
@@ -34,18 +34,18 @@ class ServerApplication: CommandLineRunner {
         playerRepo.deleteAll()
         val a = ObjectId.get()
         val b = ObjectId.get()
-        playerRepo.save(JpaPlayer(a, "kekus", team = TeamColor.RED, role = UserRole.PLAYER))
-        playerRepo.save(JpaPlayer(b, "admin", team = TeamColor.BLUE, role = UserRole.CAPTAIN))
+        playerRepo.save(JpaPlayer(a, "kekus", team = GameColor.RED, role = UserRole.PLAYER))
+        playerRepo.save(JpaPlayer(b, "admin", team = GameColor.BLUE, role = UserRole.CAPTAIN))
 
         cardRepo.deleteAll()
         val c = ObjectId.get()
         val d = ObjectId.get()
         cardRepo.save(
-            JpaCard(c, color = TeamColor.BLACK,
+            JpaCard(c, gameColor = GameColor.BLACK,
             chosenUsers = listOf(playerRepo.findByIdOrNull(a)!!, playerRepo.findByIdOrNull(b)!!))
         )
         cardRepo.save(
-            JpaCard(d, color = TeamColor.YELLOW,
+            JpaCard(d, gameColor = GameColor.YELLOW,
             chosenUsers = listOf(playerRepo.findByIdOrNull(b)!!))
         )
 
