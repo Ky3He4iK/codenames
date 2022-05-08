@@ -5,6 +5,8 @@ import '../style/colors.dart';
 enum GameColor { BLUE, RED, GREEN, YELLOW, BLACK, WHITE, }
 
 enum UserRole { CAPTAIN, PLAYER, OBSERVER }
+enum GameStatus { PREPARING, FINISHED, PLAYING }
+enum TurnStatus { WRITING, GUESSING }
 
 class Hint {
   String word;
@@ -30,10 +32,48 @@ class CardInfo {
 class Game {
   List<CardInfo> cards;
   List<Hint> hints;
-  String status;
+  GameStatus status;
+  TurnStatus turnStatus;
+  GameColor curTeamColor;
   int nextTurnTime;
 
-  Game(this.cards, this.hints, this.status, this.nextTurnTime);
+  Game(this.cards, this.hints, this.status, this.turnStatus, this.curTeamColor, this.nextTurnTime);
+
+  String turnText() {
+    switch (status) {
+      case GameStatus.FINISHED:
+        return "ИГРА ЗАВЕРШЕНА";
+      case GameStatus.PREPARING:
+        return "СТАДИЯ\nПОДГОТОВКИ";
+      case GameStatus.PLAYING:
+        break;
+    }
+    String text = "ХОД";
+    switch (turnStatus) {
+      case TurnStatus.WRITING:
+        text += " КАПИТАНА\n";
+        break;
+      case TurnStatus.GUESSING:
+        text += " ИГРОКОВ\n";
+    }
+    switch (curTeamColor) {
+      case GameColor.BLUE:
+        text += "СИНЕЙ КОМАНДЫ";
+        break;
+      case GameColor.RED:
+        text += "КРАСНОЙ КОМАНДЫ";
+        break;
+      case GameColor.YELLOW:
+        text += "ЖЕЛТОЙ КОМАНДЫ";
+        break;
+      case GameColor.GREEN:
+        text += "ЗЕЛЕНОЙ КОМАНДЫ";
+        break;
+      default:
+        break;
+    }
+    return text;
+  }
 }
 
 class Settings {
@@ -70,7 +110,7 @@ class Room {
       this.type, this.name, this.game);
 }
 
-extension TeamColorExtension on GameColor {
+extension GameColorExtension on GameColor {
 
   Color get color {
     switch (this) {

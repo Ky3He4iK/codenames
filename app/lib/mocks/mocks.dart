@@ -87,7 +87,9 @@ class Mocks {
         Game(
             randomCards(cardCount, blackCardCount, whiteCardCount, teamsCount),
             hints(teamsCount),
-            "Status",
+            GameStatus.PLAYING,
+            TurnStatus.GUESSING,
+            GameColor.GREEN,
             nextTime,
         )
     );
