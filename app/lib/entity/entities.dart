@@ -88,6 +88,9 @@ extension TeamColorExtension on TeamColor {
         return ColorConstants.white;
     }
   }
+  static List<TeamColor> forTeams() {
+    return [TeamColor.BLUE, TeamColor.RED, TeamColor.GREEN, TeamColor.YELLOW];
+  }
   Color get textColor {
     switch (this) {
       case TeamColor.BLUE:

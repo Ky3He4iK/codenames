@@ -29,13 +29,12 @@ class HintWidget extends StatelessWidget {
               child: Column(
                   children:  [
                     for(int l = 0; l < hints.length; l++)
-                      TextWidget(text: hints[l].getText(), size: TextSize.SMALL,),
-                    if (hints.isEmpty)
-                      TextWidget(text: "Слов нет", size: TextSize.SMALL,)
+                      TextWidget.s(hints[l].getText()),
+                    if (hints.isEmpty) TextWidget.s("Слов нет")
                   ]
               ),
             ) :
-            Center(child: TextWidget(text: hints.isNotEmpty ? hints.last.getText() : "Слов нет", size: TextSize.SMALL,)),
+            Center(child: TextWidget.s(hints.isNotEmpty ? hints.last.getText() : "Слов нет")),
           ),
           if (isOpened)
             Expanded(
@@ -46,10 +45,7 @@ class HintWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      TextFieldWidget(
-                        hintText: 'Подсказка',
-                        size: TextSize.SMALL,
-                      ),
+                      TextFieldWidget.c('Подсказка'),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: FittedBox(
@@ -58,7 +54,7 @@ class HintWidget extends StatelessWidget {
                               style: ElevatedButton.styleFrom(primary: teamColor.color),
                               child: Padding(
                                 padding: const EdgeInsets.all(8),
-                                child: TextWidget(text: "Отправить", color: teamColor.textColor, size: TextSize.SMALL,),
+                                child: TextWidget(text: "Отправить", color: teamColor.textColor, size: TextSize.SMALL),
                               )),
                         ),
                       ),

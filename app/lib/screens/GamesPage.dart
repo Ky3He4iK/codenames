@@ -28,25 +28,22 @@ class _GamesPageState extends State<GamesPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TopBar(),
-            ContentRow(),
+            topBar(),
+            Expanded(
+              flex: 4,
+              child: Row(
+                children: [
+                  leftMenuCard(),
+                  if (!gameCreation) gamesListCard() else gameCreateCard()
+                ],
+              ),
+            ),
           ],
-        ));
-  }
-
-  Expanded ContentRow() {
-    return Expanded(
-      flex: 4,
-      child: Row(
-        children: [
-          BackMenuWidget(),
-          if (!gameCreation) GameSearchWidget() else GameCreationWidget()
-        ],
-      ),
+        )
     );
   }
 
-  CardWidget BackMenuWidget() {
+  CardWidget leftMenuCard() {
     return CardWidget(
         flex: 1,
         child: Expanded(
@@ -59,7 +56,7 @@ class _GamesPageState extends State<GamesPage> {
                   flex: 2,
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(10.0),
-                      child: Image(image: AssetImage("assets/images/icon.png"))),
+                      child: const Image(image: AssetImage("assets/images/icon.png"))),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -76,7 +73,7 @@ class _GamesPageState extends State<GamesPage> {
                         onPressed: () {Navigator.pushNamed(context, '/team');},
                         style: ElevatedButton.styleFrom(primary: ColorConstants.green),
                         child: Padding(
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           child: TextWidget(
                             text: "Войти по коду",
                             color: ColorConstants.white,
@@ -105,7 +102,7 @@ class _GamesPageState extends State<GamesPage> {
         ));
   }
 
-  CardWidget GameCreationWidget() {
+  CardWidget gameCreateCard() {
     return CardWidget(
       flex: 3,
       child: Padding(
@@ -113,12 +110,12 @@ class _GamesPageState extends State<GamesPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextWidget(text: "Создание комнаты"),
+            TextWidget.n("Создание комнаты"),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextFieldWidget.c('Название'),
             ),
-            Container(
+            SizedBox(
               height: 70,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -144,10 +141,8 @@ class _GamesPageState extends State<GamesPage> {
                   onPressed: () {Navigator.pushNamed(context, '/team');},
                   style: ElevatedButton.styleFrom(primary: ColorConstants.yellow),
                   child: Padding(
-                    padding: EdgeInsets.all(8),
-                    child: TextWidget(
-                        text: "Создать комнату",
-                        enableFit: false),
+                    padding: const EdgeInsets.all(8),
+                    child: TextWidget(text: "Создать комнату", enableFit: false),
                   )),
             ),
           ],
@@ -156,7 +151,7 @@ class _GamesPageState extends State<GamesPage> {
     );
   }
 
-  CardWidget GameSearchWidget() {
+  CardWidget gamesListCard() {
     return CardWidget(
         flex: 3,
         child: Expanded(
@@ -190,7 +185,7 @@ class _GamesPageState extends State<GamesPage> {
         ));
   }
 
-  CardWidget TopBar() {
+  CardWidget topBar() {
     return CardWidget(
         child: Expanded(
       child: Padding(
@@ -199,7 +194,7 @@ class _GamesPageState extends State<GamesPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TextWidget.c("Codenames", TextSize.BIG,),
+            TextWidget.b("Codenames"),
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: SquareButtonWidget(

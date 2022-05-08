@@ -15,8 +15,8 @@ class TextFieldWidget extends StatelessWidget {
   TextFieldWidget.c(
     this.hintText,
   ) : super() {
-    this.isNumber = false;
-    this.size = TextSize.NORMAL;
+    isNumber = false;
+    size = TextSize.NORMAL;
   }
   late bool isNumber;
   List<FilteringTextInputFormatter>? formatters;

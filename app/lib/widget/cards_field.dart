@@ -6,17 +6,13 @@ import 'package:app/widget/word_card_widget.dart';
 import 'package:flutter/material.dart';
 
 class CardsField extends StatelessWidget {
-  CardsField({
-    Key? key, required this.cards
-  }) : super(key: key) {
-    if (cards.length % 7 == 0){
-      cardsInRow = 7;
-    } else if (cards.length % 6 == 0){
-      cardsInRow = 6;
-    } else if (cards.length % 5 == 0){
-      cardsInRow = 5;
-    } else {
-      cardsInRow = 4;
+  CardsField(this.cards) : super() {
+    cardsInRow = 4;
+    for (int i = 7; i > 3; i ++) {
+      if (cards.length % i == 0){
+        cardsInRow = i;
+        break;
+      }
     }
     rowCount = cards.length ~/ cardsInRow;
   }
@@ -35,7 +31,12 @@ class CardsField extends StatelessWidget {
                 child: Row(
                   children: [
                     for (int j = 0; j < cardsInRow; j++)
-                      WordCard(card: cards[i*cardsInRow + j], isOpened: cards[i*cardsInRow + j].isOpened, teamColor: ColorConstants.blue, guesses: cards[i*cardsInRow + j].choicedUsers.length,),
+                      WordCard(
+                        card: cards[i*cardsInRow + j],
+                        isOpened: cards[i*cardsInRow + j].isOpened,
+                        teamColor: ColorConstants.blue,
+                        guesses: cards[i*cardsInRow + j].choicedUsers.length,
+                      ),
                   ],
                 ),
               )

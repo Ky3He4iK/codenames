@@ -5,7 +5,7 @@ import 'square_button.dart';
 import 'text_widget.dart';
 
 class CountWidget extends StatefulWidget {
-  CountWidget({Key? key, required this.color, required this.text,}) : super(key: key);
+  const CountWidget({Key? key, required this.color, required this.text,}) : super(key: key);
   final Color color;
   final String text;
 
@@ -21,7 +21,7 @@ class _CountWidget extends State<CountWidget> {
       child: Column(
         children: [
           Center(child: TextWidget(text: widget.text, size: TextSize.NORMAL)),
-          Container(
+          SizedBox(
               height: 60,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

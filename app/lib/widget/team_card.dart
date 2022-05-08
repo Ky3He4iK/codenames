@@ -1,8 +1,7 @@
 import 'package:app/style/colors.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-
-import '../entity/entities.dart';
+import 'package:app/entity/entities.dart';
 import 'card.dart';
 import 'text_widget.dart';
 
@@ -64,30 +63,29 @@ class TeamListWidget extends StatelessWidget {
           text: 'Капитан',
           size: TextSize.SMALL
         ),
-        TextWidget(
-          text: captain != null ? captain == username ? '${captain!} (Вы)' : captain! : "Не занято"
+        TextWidget.n(
+          captain != null
+          ? captain == username ? '${captain!} (Вы)' : captain!
+          : "Не занято"
         ),
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: Container(
               height: 2,
               width: double.infinity,
-              decoration: BoxDecoration(
-                  color: color,
-              )),
+              decoration: BoxDecoration(color: color)
+          ),
         ),
-        TextWidget(
-            text: 'Команда',
-            size: TextSize.SMALL
-        ),
+        TextWidget.s('Команда'),
         if (team.isNotEmpty)
-        Column(
-          children: [for (var i in team) TextWidget(
-            text: i == username ? '$i (Вы)' : i,
-          ),],
-        )
+          Column(
+            children: [
+              for (var i in team)
+                TextWidget.n(i == username ? '$i (Вы)' : i)
+            ],
+          )
         else
-          Text(
+          const Text(
             'Никого',
             maxLines: 3,
             overflow: TextOverflow.ellipsis,

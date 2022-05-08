@@ -53,7 +53,7 @@ class RoomWidget extends StatelessWidget {
                           ),
                         ),),
                     ),
-                    Spacer(flex: 2),
+                    const Spacer(flex: 2),
                     Expanded(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10.0),

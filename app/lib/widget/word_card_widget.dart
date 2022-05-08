@@ -5,7 +5,7 @@ import 'package:app/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class WordCard extends StatefulWidget {
-  const WordCard({
+  WordCard({
     Key? key,
     required this.card,
     required this.isOpened,
@@ -13,49 +13,40 @@ class WordCard extends StatefulWidget {
     required this.guesses,
   }) : super(key: key);
   final CardInfo card;
-  final bool isOpened;
+  bool isOpened;
   final Color teamColor;
-  final int guesses;
+  int guesses;
   @override
-  State<WordCard> createState() => _WordCardState(card, isOpened, teamColor, guesses);
+  State<WordCard> createState() => _WordCardState();
 }
 
 class _WordCardState  extends State<WordCard>  {
-  _WordCardState(
-      this.card,
-      this.isOpened,
-      this.teamColor,
-      this.guesses,
-      );
-  final CardInfo card;
-  final Color teamColor;
-  bool isOpened;
+  _WordCardState();
   bool isTappedByMe = false;
-  int guesses = 0;
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
         onTap: () {
           setState(() {
-            guesses += isTappedByMe ? -1 : 1;
+            widget.guesses += isTappedByMe ? -1 : 1;
             isTappedByMe = !isTappedByMe;
           });
         },
         onLongPress: () {
           setState(() {
-            isOpened = !isOpened;
+            widget.isOpened = !widget.isOpened;
           });
         },
         child: Card(
-          color: isOpened ? card.color.color : ColorConstants.grey,
+          color: widget.isOpened ? widget.card.color.color : ColorConstants.grey,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
           elevation: 10,
           child: Stack(
             children: [
-              if(!isOpened)
+              if(!widget.isOpened)
                 Positioned(
                   top:0.0,
                   right: 0.0,
@@ -63,15 +54,15 @@ class _WordCardState  extends State<WordCard>  {
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: [
-                        for (int i = 0; i < guesses; i++)
+                        for (int i = 0; i < widget.guesses; i++)
                           Padding(
                             padding: const EdgeInsets.only(left: 2),
                             child: Container(
                                 width: 12,
                                 height: 12,
                                 decoration: BoxDecoration(
-                                    color: teamColor,
-                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                    color: widget.teamColor,
+                                    borderRadius: const BorderRadius.all(Radius.circular(20))
                                 )
                             ),
                           ),
@@ -79,7 +70,12 @@ class _WordCardState  extends State<WordCard>  {
                     ),
                   ),
                 ),
-              Center(child: TextWidget(text: card.text, color: isOpened ? card.color.textColor : ColorConstants.black,)),
+              Center(
+                  child: TextWidget(
+                    text: widget.card.text,
+                    color: widget.isOpened ? widget.card.color.textColor : ColorConstants.black
+                  )
+              ),
             ],
           ),
         ),

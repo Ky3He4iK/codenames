@@ -14,7 +14,7 @@ class CardWidget extends StatelessWidget {
     Key? key,
     this.insets = const EdgeInsets.all(4),
     this.flex = 1,
-    this.color = null,
+    this.color,
     this.backgroundColor = ColorConstants.white,
     required this.child,
     this.onTap,
@@ -45,7 +45,7 @@ class CardWidget extends StatelessWidget {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: color,
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10),
                         )

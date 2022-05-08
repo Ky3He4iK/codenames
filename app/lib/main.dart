@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
       ),
       home: const GamesPage(),
       routes: <String, WidgetBuilder> {
-        "/gameslist":(BuildContext context) => GamesPage(),
-        "/game":(BuildContext context) => GamePage(),
-        "/team":(BuildContext context) => TeamPickPage(),
+        "/gameslist":(BuildContext context) => const GamesPage(),
+        "/game":(BuildContext context) => const GamePage(),
+        "/team":(BuildContext context) => const TeamPickPage(),
       },
     );
   }

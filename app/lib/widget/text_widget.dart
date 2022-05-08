@@ -3,15 +3,28 @@ import 'package:flutter/material.dart';
 
 class TextWidget extends StatelessWidget {
   TextWidget({
-    Key? key, required this.text, this.size: TextSize.NORMAL, this.color: ColorConstants.black, this.enableFit = true
+    Key? key, required this.text, this.size = TextSize.NORMAL, this.color = ColorConstants.black, this.enableFit = true
   }) : super(key: key);
 
-  TextWidget.c(this.text, this.size) : super() {
+  TextWidget.s(this.text) : super() {
     color = ColorConstants.black;
     enableFit = true;
+    size = TextSize.SMALL;
+  }
+
+  TextWidget.b(this.text) : super() {
+    color = ColorConstants.black;
+    enableFit = true;
+    size = TextSize.BIG;
+  }
+
+  TextWidget.n(this.text) : super() {
+    color = ColorConstants.black;
+    enableFit = true;
+    size = TextSize.NORMAL;
   }
   final String text;
-  final TextSize size;
+  late TextSize size;
   late Color color;
   late bool enableFit;
 
@@ -33,7 +46,6 @@ class TextWidget extends StatelessWidget {
 }
 enum TextSize {
   BIG, NORMAL, SMALL, HEADING_GAME
-
 }
 extension TextSizeExtension on TextSize {
 

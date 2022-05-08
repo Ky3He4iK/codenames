@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../style/colors.dart';
+import 'package:app/style/colors.dart';
 
 class SquareButtonWidget extends StatelessWidget {
   const SquareButtonWidget({

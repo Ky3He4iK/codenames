@@ -15,13 +15,13 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   late Room room;
-  late List<TeamColor> colors;
+  List<TeamColor> colors = TeamColorExtension.forTeams();
   late int pickedHintListIndex;
 
   @override
   void initState() {
+    super.initState();
     room = Mocks.getRoom();
-    colors = [TeamColor.BLUE, TeamColor.RED, TeamColor.GREEN, TeamColor.YELLOW];
     pickedHintListIndex = 0;
   }
 
@@ -36,9 +36,7 @@ class _GamePageState extends State<GamePage> {
                 child: Column(
                   children: [
                     GameTopBarWidget(room: room, colors: colors),
-                    CardsField(
-                      cards: room.game!.cards,
-                    )
+                    CardsField(room.game!.cards,)
                   ],
                 )),
             Flexible(

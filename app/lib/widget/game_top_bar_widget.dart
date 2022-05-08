@@ -29,7 +29,7 @@ class _GameTopBarWidgetState extends State<GameTopBarWidget> {
       flex: 1,
       child: Row(children: [
         Padding(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: SquareButtonWidget(
             pic: 'assets/images/people.svg',
             color: ColorConstants.black,
@@ -43,7 +43,7 @@ class _GameTopBarWidgetState extends State<GameTopBarWidget> {
             child: Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(child: Center(child: TextWidget(text: "ХОД КАПИТАНА\nСИНЕЙ КОМАНДЫ", color: ColorConstants.blue,))),
+                child: Center(child: TextWidget(text: "ХОД КАПИТАНА\nСИНЕЙ КОМАНДЫ", color: ColorConstants.blue,)),
               ),
             )),
         CardWidget(
@@ -72,11 +72,8 @@ class _GameTopBarWidgetState extends State<GameTopBarWidget> {
 }
 
 class TimerWidget extends StatefulWidget {
-
   const TimerWidget(this.nextTurnTime) : super();
-
   final int nextTurnTime;
-
   @override
   State<TimerWidget> createState() => _TimerState();
 }
@@ -88,14 +85,13 @@ class _TimerState extends State<TimerWidget> {
 
   @override
   void initState() {
-    _everySecond = Timer.periodic(Duration(seconds: 1), (Timer t) {
+    super.initState();
+    _everySecond = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       setState(() {
         int t = ((widget.nextTurnTime - DateTime.now().millisecondsSinceEpoch) ~/ 1000);
         time = t.toString();
-        if (t < 10)
-          isTick = !isTick;
-        if (t == 0)
-          _everySecond.cancel();
+        if (t < 10) isTick = !isTick;
+        if (t == 0) _everySecond.cancel();
       });
     });
   }
@@ -104,7 +100,11 @@ class _TimerState extends State<TimerWidget> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Center(
-        child: TextWidget(text: time, size: TextSize.BIG, color: isTick ? ColorConstants.red : ColorConstants.black,),
+        child: TextWidget(
+          text: time,
+          size: TextSize.BIG,
+          color: isTick ? ColorConstants.red : ColorConstants.black,
+        ),
       ),
     );
   }

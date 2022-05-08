@@ -20,14 +20,14 @@ class TeamPickPage extends StatefulWidget {
 
 class _TeamPickPageState extends State<TeamPickPage> {
   late Room room;
-  List<TeamColor> colors = [];
+  List<TeamColor> colors = TeamColorExtension.forTeams();
   List<SquareButtonModel> menuButtons = [];
   late SquareButtonModel gameModel;
 
   @override
   void initState() {
+    super.initState();
     room = Mocks.getRoom();
-    colors = [TeamColor.BLUE, TeamColor.RED, TeamColor.GREEN, TeamColor.YELLOW];
     menuButtons = [
       SquareButtonModel('assets/images/restart.svg', ColorConstants.blue,
           ColorConstants.white, () {}),
@@ -58,16 +58,16 @@ class _TeamPickPageState extends State<TeamPickPage> {
                 flex: 4,
                 child: Column(
                   children: [
-                    TopBar(),
-                    TeamCards(),
+                    topBar(),
+                    teamsCards(),
                   ],
                 )),
-            SettingsCard(),
+            settingsCard(),
           ],
         ));
   }
 
-  CardWidget SettingsCard() {
+  CardWidget settingsCard() {
     return CardWidget(
       child: Expanded(
         child: Padding(
@@ -76,10 +76,10 @@ class _TeamPickPageState extends State<TeamPickPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Spacer(),
+              const Spacer(),
               Column(
                 children: [
-                  Center(child: TextWidget(text: 'Время хода (секунды)')),
+                  Center(child: TextWidget.n('Время хода (секунды)')),
                   TextFieldWidget(
                     isNumber: true,
                     formatters: [
@@ -90,12 +90,12 @@ class _TeamPickPageState extends State<TeamPickPage> {
                   ),
                 ],
               ),
-              Spacer(),
-              CountWidget(text: 'Команды', color: ColorConstants.blue),
-              CountWidget(text: 'Размер поля', color: ColorConstants.green),
-              CountWidget(text: 'Белые карты', color: ColorConstants.yellow),
-              CountWidget(text: 'Черные карты', color: ColorConstants.red),
-              Spacer()
+              const Spacer(),
+              const CountWidget(text: 'Команды', color: ColorConstants.blue),
+              const CountWidget(text: 'Размер поля', color: ColorConstants.green),
+              const CountWidget(text: 'Белые карты', color: ColorConstants.yellow),
+              const CountWidget(text: 'Черные карты', color: ColorConstants.red),
+              const Spacer()
             ],
           ),
         ),
@@ -104,7 +104,7 @@ class _TeamPickPageState extends State<TeamPickPage> {
     );
   }
 
-  Expanded TeamCards() {
+  Expanded teamsCards() {
     return Expanded(
         flex: 4,
         child: Row(
@@ -118,11 +118,11 @@ class _TeamPickPageState extends State<TeamPickPage> {
         ));
   }
 
-  Expanded TopBar() {
+  Expanded topBar() {
     return Expanded(
       child: Row(children: [
         Padding(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: SquareButtonWidget(
             pic: gameModel.picturePath,
             color: gameModel.buttonColor,
@@ -134,20 +134,20 @@ class _TeamPickPageState extends State<TeamPickPage> {
             child: Expanded(
           child: Center(
             child: Padding(
-                padding: EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: TextWidget(text: 'Код:', size: TextSize.BIG),
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextWidget.b('Код:'),
                     ),
                     Tooltip(
                       message: 'Скопировано',
                       triggerMode: TooltipTriggerMode.tap,
                       child:
-                          TextWidget(text: room.inviteCode, size: TextSize.BIG),
+                          TextWidget.b(room.inviteCode),
                     )
                   ],
                 )),
@@ -163,7 +163,7 @@ class _TeamPickPageState extends State<TeamPickPage> {
               children: [
                 for (var i = 0; i < menuButtons.length; i++)
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
                     child: SquareButtonWidget(
                       pic: menuButtons[i].picturePath,
                       color: menuButtons[i].buttonColor,
