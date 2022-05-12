@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController
 class RoomController(
     val roomService: RoomService
 ) {
-
     @PostMapping
     fun createRoom(
         @RequestParam roomName: String,
@@ -24,6 +23,28 @@ class RoomController(
             ownerName = ownerName,
             isPrivate = isPrivate,
             settings = settings
+        )
+    }
+
+    @PostMapping
+    fun joinRoom(
+        @RequestParam inviteCode: String,
+        @RequestParam joinerName: String
+    ) {
+        roomService.joinRoom(
+            inviteCode = inviteCode,
+            joinerName = joinerName
+        )
+    }
+
+    @PostMapping
+    fun leaveRoom(
+        @RequestParam inviteCode: String,
+        @RequestParam leaverName: String
+    ) {
+        roomService.leaveRoom(
+            inviteCode = inviteCode,
+            leaverName = leaverName
         )
     }
 

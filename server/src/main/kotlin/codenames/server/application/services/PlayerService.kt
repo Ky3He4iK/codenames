@@ -2,6 +2,7 @@ package codenames.server.application.services
 
 import codenames.server.application.persistence.PlayerRepository
 import codenames.server.application.persistence.RoomRepository
+import codenames.server.domain.enums.UserRole
 import codenames.server.infrastructure.jpa.JpaPlayer
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
@@ -10,9 +11,8 @@ import org.springframework.stereotype.Service
 class PlayerService(
     val playerRepository: PlayerRepository,
 ) {
-
     fun createPlayer(name: String): JpaPlayer {
-        val player = JpaPlayer(playerId =  ObjectId.get(), name = name)
+        val player = JpaPlayer(playerId =  ObjectId.get(), name = name, role = UserRole.OBSERVER)
         playerRepository.save(player)
         return player
     }

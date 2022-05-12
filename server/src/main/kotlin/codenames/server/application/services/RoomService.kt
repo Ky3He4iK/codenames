@@ -26,7 +26,7 @@ class RoomService(
             JpaRoom(
                 roomId = ObjectId.get(),
                 settings = settings.toJpa(),
-                players = listOf(owner),
+                players = mutableListOf(owner),
                 owner = owner,
                 inviteCode = StringUtils.getRandomString(5),
                 isPrivate = isPrivate,
@@ -34,5 +34,35 @@ class RoomService(
                 game = gameService.createGame(settings)
             )
         )
+    }
+
+    fun joinRoom(
+        inviteCode: String,
+        joinerName: String
+    ) {
+        val joiner = playerService.createPlayer(joinerName)
+        val room = roomRepository.findByInviteCode(inviteCode)
+        if (room != null) {
+            roomRepository.save(room.apply {
+                players.add(joiner)
+            })
+        }
+    }
+
+    fun leaveRoom(
+        inviteCode: String,
+        leaverName: String
+    ) {
+        val room = roomRepository.findByInviteCode(inviteCode)
+        if (room != null) {
+            val newpPlayers = room.players
+            val leaver = newpPlayers.find {
+                it.name == leaverName
+            }
+            newpPlayers.remove(leaver)
+            roomRepository.save(room.apply {
+                players = newpPlayers
+            })
+        }
     }
 }

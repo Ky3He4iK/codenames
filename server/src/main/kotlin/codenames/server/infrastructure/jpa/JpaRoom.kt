@@ -14,7 +14,7 @@ class JpaRoom(
     var settings: JpaGameSettings,
 
     @DBRef
-    var players: List<JpaPlayer>? = null,
+    var players: MutableList<JpaPlayer> = mutableListOf(),
 
     @DBRef
     var owner: JpaPlayer? = null,
