@@ -6,10 +6,10 @@ import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RestController
 
-@RestController
+@RestController("/game")
 class GameController {
 
-    @MessageMapping("/game/{id}")
+    @MessageMapping("{id}")
     fun sendMessage(@DestinationVariable id: String, game: Game){
 
     }

@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
-@RestController
+@RestController("/room")
 class RoomController(
     val roomService: RoomService
 ) {
-    @PostMapping
+    @PostMapping("/create")
     fun createRoom(
         @RequestParam roomName: String,
         @RequestParam ownerName: String,
@@ -26,7 +26,7 @@ class RoomController(
         )
     }
 
-    @PostMapping
+    @PostMapping("/join")
     fun joinRoom(
         @RequestParam inviteCode: String,
         @RequestParam joinerName: String
@@ -37,7 +37,7 @@ class RoomController(
         )
     }
 
-    @PostMapping
+    @PostMapping("/leave")
     fun leaveRoom(
         @RequestParam inviteCode: String,
         @RequestParam leaverName: String
