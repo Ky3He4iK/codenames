@@ -3,10 +3,12 @@ package codenames.server.application.services
 import codenames.server.application.persistence.RoomRepository
 import codenames.server.domain.Game
 import codenames.server.domain.GameSettings
+import codenames.server.domain.Player
 import codenames.server.domain.Room
 import codenames.server.domain.utils.StringUtils
 import codenames.server.infrastructure.jpa.JpaGameSettings
 import codenames.server.infrastructure.jpa.JpaGameSettings.Companion.toJpa
+import codenames.server.infrastructure.jpa.JpaPlayer.Companion.toModel
 import codenames.server.infrastructure.jpa.JpaRoom
 import codenames.server.infrastructure.jpa.JpaRoom.Companion.toModel
 import org.bson.types.ObjectId
@@ -51,7 +53,7 @@ class RoomService(
     fun joinRoom(
         inviteCode: String,
         joinerName: String
-    ) {
+    ): Player {
         val joiner = playerService.createPlayer(joinerName)
         val room = roomRepository.findByInviteCode(inviteCode)
         if (room != null) {
@@ -59,22 +61,27 @@ class RoomService(
                 players.add(joiner)
             })
         }
+        return joiner.toModel()
     }
 
     fun leaveRoom(
         inviteCode: String,
         leaverName: String
-    ) {
+    ): Player? {
         val room = roomRepository.findByInviteCode(inviteCode)
         if (room != null) {
             val newpPlayers = room.players
             val leaver = newpPlayers.find {
                 it.name == leaverName
             }
-            newpPlayers.remove(leaver)
-            roomRepository.save(room.apply {
-                players = newpPlayers
-            })
+            if (leaver != null) {
+                newpPlayers.remove(leaver)
+                roomRepository.save(room.apply {
+                    players = newpPlayers
+                })
+                return leaver.toModel()
+            }
         }
+        return null
     }
 }
