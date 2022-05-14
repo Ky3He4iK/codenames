@@ -1,6 +1,7 @@
 package codenames.server.application.services
 
 import codenames.server.application.persistence.RoomRepository
+import codenames.server.domain.Game
 import codenames.server.domain.GameSettings
 import codenames.server.domain.utils.StringUtils
 import codenames.server.infrastructure.jpa.JpaGameSettings
@@ -19,19 +20,28 @@ class RoomService(
         roomName: String,
         ownerName: String,
         isPrivate: Boolean,
-        settings: GameSettings
+        settings: GameSettings?
     ) {
         val owner = playerService.createPlayer(ownerName)
+        val cur_settings = settings ?: GameSettings(
+            settingsId = ObjectId.get(),
+            teamsCount = 2,
+            turnTime = 60,
+            cardCount = 25,
+            blackCardCount = 1,
+            whiteCardCount = 7,
+            0
+        )
         roomRepository.save(
             JpaRoom(
                 roomId = ObjectId.get(),
-                settings = settings.toJpa(),
+                settings = cur_settings.toJpa(),
                 players = mutableListOf(owner),
                 owner = owner,
                 inviteCode = StringUtils.getRandomString(5),
                 isPrivate = isPrivate,
                 name = roomName,
-                game = gameService.createGame(settings)
+                game = gameService.createGame(cur_settings)
             )
         )
     }

@@ -16,7 +16,7 @@ class RoomController(
         @RequestParam roomName: String,
         @RequestParam ownerName: String,
         @RequestParam isPrivate: Boolean,
-        @RequestBody settings: GameSettings
+        @RequestBody settings: GameSettings?
     ) {
         roomService.createRoom(
             roomName = roomName,

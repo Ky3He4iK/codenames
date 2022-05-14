@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Scope
 
 @Configuration
 class LoggingConfig {
-
     @Bean
     @Scope("prototype")
     fun logger(injectionPoint: InjectionPoint): Logger {
