@@ -4,9 +4,11 @@ import codenames.server.domain.Game
 import org.springframework.messaging.handler.annotation.DestinationVariable
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-@RestController("/game")
+@RestController
+@RequestMapping("/game")
 class GameController {
 
     @MessageMapping("{id}")

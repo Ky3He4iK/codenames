@@ -3,10 +3,12 @@ package codenames.server.application.services
 import codenames.server.application.persistence.RoomRepository
 import codenames.server.domain.Game
 import codenames.server.domain.GameSettings
+import codenames.server.domain.Room
 import codenames.server.domain.utils.StringUtils
 import codenames.server.infrastructure.jpa.JpaGameSettings
 import codenames.server.infrastructure.jpa.JpaGameSettings.Companion.toJpa
 import codenames.server.infrastructure.jpa.JpaRoom
+import codenames.server.infrastructure.jpa.JpaRoom.Companion.toModel
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
 
@@ -21,7 +23,7 @@ class RoomService(
         ownerName: String,
         isPrivate: Boolean,
         settings: GameSettings?
-    ) {
+    ): Room {
         val owner = playerService.createPlayer(ownerName)
         val cur_settings = settings ?: GameSettings(
             settingsId = ObjectId.get(),
@@ -32,18 +34,18 @@ class RoomService(
             whiteCardCount = 7,
             0
         )
-        roomRepository.save(
-            JpaRoom(
-                roomId = ObjectId.get(),
-                settings = cur_settings.toJpa(),
-                players = mutableListOf(owner),
-                owner = owner,
-                inviteCode = StringUtils.getRandomString(5),
-                isPrivate = isPrivate,
-                name = roomName,
-                game = gameService.createGame(cur_settings)
-            )
+        val jpaRoom = JpaRoom(
+            roomId = ObjectId.get(),
+            settings = cur_settings.toJpa(),
+            players = mutableListOf(owner),
+            owner = owner,
+            inviteCode = StringUtils.getRandomString(5),
+            isPrivate = isPrivate,
+            name = roomName,
+            game = gameService.createGame(cur_settings)
         )
+        roomRepository.save(jpaRoom)
+        return jpaRoom.toModel()
     }
 
     fun joinRoom(

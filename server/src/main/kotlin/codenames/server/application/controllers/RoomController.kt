@@ -2,12 +2,16 @@ package codenames.server.application.controllers
 
 import codenames.server.application.services.RoomService
 import codenames.server.domain.GameSettings
+import codenames.server.domain.Room
+import codenames.server.domain.response.RoomCreateResponse
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
-@RestController("/room")
+@RestController
+@RequestMapping("/room")
 class RoomController(
     val roomService: RoomService
 ) {
@@ -17,13 +21,14 @@ class RoomController(
         @RequestParam ownerName: String,
         @RequestParam isPrivate: Boolean,
         @RequestBody settings: GameSettings?
-    ) {
-        roomService.createRoom(
+    ): RoomCreateResponse {
+        val room = roomService.createRoom(
             roomName = roomName,
             ownerName = ownerName,
             isPrivate = isPrivate,
             settings = settings
         )
+        return RoomCreateResponse(room)
     }
 
     @PostMapping("/join")
