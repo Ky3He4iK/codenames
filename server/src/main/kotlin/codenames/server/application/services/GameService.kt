@@ -27,4 +27,15 @@ class GameService(
         gameRepository.save(game)
         return game
     }
+
+    fun getGame(
+        gameId: String
+    ): Boolean {
+        return try {
+            gameRepository.findById(ObjectId(gameId))
+            true
+        } catch (e: IllegalArgumentException) {
+            false
+        }
+    }
 }
