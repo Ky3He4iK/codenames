@@ -1,9 +1,11 @@
 package codenames.server.application.services
 
 import codenames.server.application.persistence.GameRepository
+import codenames.server.domain.Game
 import codenames.server.domain.GameSettings
 import codenames.server.domain.enums.GameStatus
 import codenames.server.infrastructure.jpa.JpaGame
+import codenames.server.infrastructure.jpa.JpaGame.Companion.toModel
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
 
@@ -28,7 +30,7 @@ class GameService(
         return game
     }
 
-    fun getGame(
+    fun checkGameExistence(
         gameId: String
     ): Boolean {
         return try {
@@ -36,6 +38,16 @@ class GameService(
             true
         } catch (e: IllegalArgumentException) {
             false
+        }
+    }
+
+    fun getGame(
+        gameId: String
+    ): Game? {
+        return try {
+            gameRepository.findById(ObjectId(gameId)).get().toModel()
+        } catch (e: IllegalArgumentException) {
+            null
         }
     }
 }

@@ -1,10 +1,10 @@
 package codenames.server.infrastructure.config
 
 class HelloMessage {
-    var name: String? = null
+    var gameId: String? = null
 
     constructor() {}
     constructor(name: String?) {
-        this.name = name
+        this.gameId = name
     }
 }
