@@ -12,5 +12,5 @@ data class Game(
     var status: GameStatus,
     var turnStatus: TurnStatus?,
     var curTeamColor: GameColor?,
-    var nextTurnTime: Int = 0
+    var nextTurnTime: Long = 0
 )

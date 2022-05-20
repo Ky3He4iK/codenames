@@ -14,11 +14,11 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class JpaCard(
     @Id
     var cardId: ObjectId,
-    var text: String? = null,
-    var cardColor: GameColor? = null,
-    var state: String? = null,
+    var text: String? = "Спасибо, Михаил!",
+    var cardColor: GameColor? = GameColor.BLUE,
+    var state: Boolean? = false,
     @DBRef
-    var chosenUsers: List<JpaPlayer>? = null
+    var chosenUsers: List<JpaPlayer>? = listOf()
 ) {
     companion object {
         fun JpaCard.toModel() = Card(

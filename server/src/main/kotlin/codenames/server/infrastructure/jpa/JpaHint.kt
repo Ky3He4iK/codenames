@@ -10,9 +10,9 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class JpaHint(
     @Id
     var hintId: ObjectId,
-    var word: String? = null,
+    var word: String? = "pepega",
     var number: Int = 0,
-    var team: GameColor? = null,
+    var team: GameColor? = GameColor.BLUE,
 ){
     companion object {
         fun JpaHint.toModel() = Hint(

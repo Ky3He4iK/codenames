@@ -1,5 +1,5 @@
 package codenames.server.domain.enums
 
 enum class GameColor {
-    BLACK, WHITE, BLUE, RED, GREEN, YELLOW
+    BLUE, RED, GREEN, YELLOW, BLACK, WHITE
 }

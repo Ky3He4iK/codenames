@@ -21,7 +21,7 @@ data class JpaGame(
     var status: GameStatus,
     var turnStatus: TurnStatus?,
     var curTeamColor: GameColor?,
-    var nextTurnTime: Int = 0
+    var nextTurnTime: Long = 0
 ) {
     companion object {
         fun JpaGame.toModel() = Game(

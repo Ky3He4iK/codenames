@@ -7,6 +7,6 @@ data class Card(
     var cardId: ObjectId,
     var text: String? = null,
     var cardColor: GameColor? = null,
-    var state: String? = null,
+    var state: Boolean? = null,
     var chosenUsers: List<Player>? = null
 )
