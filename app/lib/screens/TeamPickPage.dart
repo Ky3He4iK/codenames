@@ -13,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:math';
 
+import '../entity/color_extension.dart';
+
 class TeamPickPage extends StatefulWidget {
   const TeamPickPage() : super();
 
@@ -25,7 +27,7 @@ class _TeamPickPageState extends State<TeamPickPage> {
   List<GameColor> colors = GameColorExtension.forTeams();
   List<SquareButtonModel> menuButtons = [];
   late SquareButtonModel gameModel;
-  String playerName = "User2";
+  String playerName = "Биба";
   @override
   void initState() {
     super.initState();
@@ -88,7 +90,7 @@ class _TeamPickPageState extends State<TeamPickPage> {
                       FilteringTextInputFormatter.allow(
                           RegExp(r"\b([1-9]|[1-9][0-9])\b"))
                     ],
-                    hintText: '80.',
+                    hintText: '30',
                   ),
                 ],
               ),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
@@ -8,6 +9,8 @@ import 'package:app/widget/square_button.dart';
 import 'package:app/widget/text_field_widget.dart';
 import 'package:app/widget/text_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../mocks/mocks.dart';
 
 class GamesPage extends StatefulWidget {
   const GamesPage() : super();
@@ -20,6 +23,7 @@ class _GamesPageState extends State<GamesPage> {
   late String username;
   bool gameCreation = false;
   bool gameOpened = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +142,12 @@ class _GamesPageState extends State<GamesPage> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
-                  onPressed: () {Navigator.pushNamed(context, '/team');},
+                  onPressed: () {
+                        Timer(Duration(seconds: 1), ()
+                        {
+                          Navigator.pushNamed(context, '/team');
+                        });
+                    },
                   style: ElevatedButton.styleFrom(primary: ColorConstants.yellow),
                   child: Padding(
                     padding: const EdgeInsets.all(8),
@@ -171,9 +180,9 @@ class _GamesPageState extends State<GamesPage> {
                               children: [
                                 for (int j = 0; j < 2; j++)
                                   RoomWidget( //TODO  Забирать с сервера список игр
-                                      name: "Название",
+                                      name: Mocks.generateName(),
                                       isPaused: Random().nextBool(),
-                                      usersCount: i % 11)
+                                      usersCount: Random().nextInt(9) + 1)
                               ]
                             )
                         ],

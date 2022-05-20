@@ -1,6 +1,5 @@
-import 'dart:ui';
 
-import '../style/colors.dart';
+import 'dart:ffi';
 
 enum GameColor { BLUE, RED, GREEN, YELLOW, BLACK, WHITE, }
 
@@ -18,6 +17,15 @@ class Hint {
   String getText() {
     return word + " " + number.toString();
   }
+
+  factory Hint.fromJson(dynamic json) {
+    return Hint(
+      json['word'] as String,
+      json['number'] as int,
+      GameColor.values.firstWhere((e) => (e.toString().toUpperCase().split('.')[1] == json['team']))
+    );
+  }
+
 }
 
 class CardInfo {
@@ -27,6 +35,15 @@ class CardInfo {
   List<int> choicedUsers;
 
   CardInfo(this.text, this.color, this.isOpened, this.choicedUsers);
+
+  factory CardInfo.fromJson(dynamic json) {
+    return CardInfo(
+      json['text'] as String,
+      GameColor.values.firstWhere((e) => (e.toString().toUpperCase().split('.')[1] == json['cardColor'])),
+      json['state'] as bool,
+      [],
+    );
+  }
 }
 
 class Game {
@@ -38,6 +55,23 @@ class Game {
   int nextTurnTime;
 
   Game(this.cards, this.hints, this.status, this.turnStatus, this.curTeamColor, this.nextTurnTime);
+
+  factory Game.fromJson(dynamic json) {
+    return Game(
+        List.from(json['cards']).map(
+            (e) => CardInfo.fromJson(e)
+        ).toList(),
+        List.from(json['hints']).map(
+                (e) => Hint.fromJson(e)
+        ).toList(),
+        // [],
+        // [],
+        GameStatus.values.firstWhere((e) => (e.toString().toUpperCase().split('.')[1] == json['status'])),
+        TurnStatus.values.firstWhere((e) => (e.toString().toUpperCase().split('.')[1] == json['turnStatus'])),
+        GameColor.values.firstWhere((e) => (e.toString().toUpperCase().split('.')[1] == json['curTeamColor'])),
+        json['nextTurnTime'] as int,
+    );
+  }
 
   String turnText() {
     switch (status) {
@@ -110,41 +144,4 @@ class Room {
       this.type, this.name, this.game);
 }
 
-extension GameColorExtension on GameColor {
 
-  Color get color {
-    switch (this) {
-      case GameColor.BLUE:
-        return ColorConstants.blue;
-      case GameColor.RED:
-        return ColorConstants.red;
-      case GameColor.GREEN:
-        return ColorConstants.green;
-      case GameColor.YELLOW:
-        return ColorConstants.yellow;
-      case GameColor.BLACK:
-        return ColorConstants.black;
-      default:
-        return ColorConstants.white;
-    }
-  }
-  static List<GameColor> forTeams() {
-    return [GameColor.BLUE, GameColor.RED, GameColor.GREEN, GameColor.YELLOW];
-  }
-  Color get textColor {
-    switch (this) {
-      case GameColor.BLUE:
-        return ColorConstants.white;
-      case GameColor.RED:
-        return ColorConstants.white;
-      case GameColor.GREEN:
-        return ColorConstants.white;
-      case GameColor.YELLOW:
-        return ColorConstants.black;
-      case GameColor.BLACK:
-        return ColorConstants.white;
-      default:
-        return ColorConstants.black;
-    }
-  }
-}

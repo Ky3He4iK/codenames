@@ -1,11 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:app/entity/entities.dart';
 import 'package:stomp_dart_client/stomp.dart';
 import 'package:stomp_dart_client/stomp_config.dart';
 import 'package:stomp_dart_client/stomp_frame.dart';
 
 class Websockets {
+
+  Websockets(this.onChanged);
+
+  final Function? onChanged;
+
 
   late String? gameId;
 
@@ -30,8 +36,12 @@ class Websockets {
     stompClient.subscribe(
       destination: '/topic/games/$gameId',
       callback: (frame) {
-        dynamic result = json.decode(frame.body!);
-        print(result);
+        var a = json.decode(frame.body!);
+        print(a);
+        Game result = Game.fromJson(a);
+        onChanged!(result);
+        // dynamic result = json.decode(frame.body!);
+        print(result.curTeamColor);
       },
     );
     stompClient.send(
@@ -59,10 +69,10 @@ class Websockets {
 
 
 
-void main() {
-  var ws = Websockets();
-  ws.stompClient.activate();
-}
+// void main() {
+//   var ws = Websockets();
+//   ws.stompClient.activate();
+// }
 
 // Timer.periodic(Duration(seconds: 10), (_) {
 //       stompClient.send(

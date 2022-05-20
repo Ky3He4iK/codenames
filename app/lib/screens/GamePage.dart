@@ -10,6 +10,9 @@ import 'package:app/widget/timer_widget.dart';
 import 'package:app/widget/word_card_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../entity/color_extension.dart';
+import '../web/websockets.dart';
+
 class GamePage extends StatefulWidget {
   const GamePage() : super();
 
@@ -23,11 +26,22 @@ class _GamePageState extends State<GamePage> {
   late int pickedHintListIndex;
   late int cardsInRow;
   late int rowCount;
-  Player me = Player(1, "Это я", GameColor.GREEN, UserRole.PLAYER);
+  late Websockets ws;
+
+  Player me = Player(2, "Биба", GameColor.BLUE, UserRole.PLAYER);
   List<int> points = [10, 10, 10, 10];
   @override
   void initState() {
     super.initState();
+
+    ws = Websockets((i) {
+      print("$i Члены негров!");
+      setState(() {
+        room.game = i as Game;
+      });
+    });
+    ws.stompClient.activate();
+
     room = Mocks.getRoom();
     pickedHintListIndex = room.game!.curTeamColor.index; //Влияет только на то, какой список открыт. Его надо менять при каждом переходе хода.
     cardsInRow = 4;

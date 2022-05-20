@@ -1,4 +1,5 @@
 
+import 'package:app/entity/color_extension.dart';
 import 'package:app/entity/entities.dart';
 import 'package:app/widget/text_field_widget.dart';
 import 'package:app/widget/text_widget.dart';
@@ -45,19 +46,19 @@ class HintWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      TextFieldWidget.c('Подсказка'),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: FittedBox(
-                          fit: BoxFit.fitWidth,
-                          child: ElevatedButton(onPressed: () {},
-                              style: ElevatedButton.styleFrom(primary: teamColor.color),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8),
-                                child: TextWidget(text: "Отправить", color: teamColor.textColor, size: TextSize.SMALL),
-                              )),
-                        ),
-                      ),
+                      // TextFieldWidget.c('Подсказка'),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(4.0),
+                      //   child: FittedBox(
+                      //     fit: BoxFit.fitWidth,
+                      //     child: ElevatedButton(onPressed: () {},
+                      //         style: ElevatedButton.styleFrom(primary: teamColor.color),
+                      //         child: Padding(
+                      //           padding: const EdgeInsets.all(8),
+                      //           child: TextWidget(text: "Отправить", color: teamColor.textColor, size: TextSize.SMALL),
+                      //         )),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ))

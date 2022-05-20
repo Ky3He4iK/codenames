@@ -6,8 +6,8 @@ import 'package:app/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class TimerWidget extends StatefulWidget {
-  const TimerWidget(this.nextTurnTime) : super();
-  final int nextTurnTime;
+  TimerWidget(this.nextTurnTime) : super();
+  int nextTurnTime;
   @override
   State<TimerWidget> createState() => _TimerState();
 }
@@ -22,7 +22,8 @@ class _TimerState extends State<TimerWidget> {
     super.initState();
     _everySecond = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       setState(() {
-        int t = ((widget.nextTurnTime - DateTime.now().millisecondsSinceEpoch) ~/ 1000);
+        widget.nextTurnTime += 500;
+        int t = ((widget.nextTurnTime - DateTime.now().millisecondsSinceEpoch ) ~/ 1000);
         time = t.toString();
         if (t < 10) isTick = !isTick;
         if (t == 0) _everySecond.cancel();

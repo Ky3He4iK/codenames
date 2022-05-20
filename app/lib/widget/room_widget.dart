@@ -47,7 +47,7 @@ class RoomWidget extends StatelessWidget {
                         Container(
                           color: ColorConstants.blue,
                           child: TextWidget(
-                            text: "8",
+                            text: usersCount.toString(),
                             size: TextSize.HEADING_GAME,
                             color: ColorConstants.white,
                           ),

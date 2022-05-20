@@ -22,66 +22,78 @@ class Mocks {
         [
           Player(
             1,
-            "User1",
+            "Судно",
             GameColor.BLUE,
             UserRole.CAPTAIN,
           ),
           Player(
             2,
-            "User2",
+            "Биба",
             GameColor.BLUE,
             UserRole.PLAYER,
           ),
           Player(
             3,
-            "User3",
+            "Боба",
             GameColor.BLUE,
             UserRole.PLAYER,
           ),
           Player(
             4,
-            "User4",
+            "Окошко",
             GameColor.RED,
             UserRole.CAPTAIN,
           ),
           Player(
             5,
-            "User5",
+            "Соломид",
             GameColor.RED,
             UserRole.PLAYER,
           ),
           Player(
             6,
-            "User6",
+            "Тумбочка",
             GameColor.YELLOW,
-            UserRole.PLAYER,
+            UserRole.CAPTAIN,
           ),
           Player(
             7,
-            "User7",
+            "xXx_Guts_xXx",
             GameColor.YELLOW,
             UserRole.PLAYER,
           ),
           Player(
             8,
-            "User8",
+            "https://clck.ru/hcJi9",
             GameColor.YELLOW,
             UserRole.PLAYER,
           ),
           Player(
-            8,
-            "User9",
+            9,
+            "Кровать",
             GameColor.GREEN,
             UserRole.CAPTAIN,
           ),
+          Player(
+            10,
+            "Дранник",
+            GameColor.GREEN,
+            UserRole.PLAYER,
+          ),
+          Player(
+            11,
+            "ЗЛОЙ ГОСТ 19.103-77",
+            GameColor.GREEN,
+            UserRole.PLAYER,
+          ),
         ],
         Player(
-          1,
-          "User2",
+          2,
+          "Биба",
           GameColor.BLUE,
           UserRole.PLAYER,
         ),
-        "FFFFFF",
+        "FAQLOL",
         0,
         "TestRoom",
         Game(
@@ -89,7 +101,7 @@ class Mocks {
             hints(teamsCount),
             GameStatus.PLAYING,
             TurnStatus.GUESSING,
-            GameColor.GREEN,
+            GameColor.BLUE,
             nextTime,
         )
     );
@@ -135,5 +147,10 @@ class Mocks {
       }
     }
     return hints;
+  }
+
+  static String generateName() {
+    final _random = Random();
+    return words[_random.nextInt(words.length)] +"_"+ words[_random.nextInt(words.length)];
   }
 }
